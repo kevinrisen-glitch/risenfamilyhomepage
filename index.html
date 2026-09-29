@@ -16,6 +16,11 @@
     --paper-soft:#f6f8fc;
     --line:#e3e8f2;
     --gold:#c8a24a;
+    --chiefs-red:#E31837;
+    --chiefs-red-deep:#9e1029;
+    --chiefs-gold:#FFB81C;
+    --chiefs-gold-deep:#9c7000;
+    --chiefs-wash:#fdf3f0;
     --radius:18px;
     --shadow: 0 1px 2px rgba(14,26,51,0.04), 0 8px 24px rgba(14,26,51,0.06);
   }
@@ -232,18 +237,30 @@
     letter-spacing:0.01em;
     flex-shrink:0;
   }
+  .market-line-main{
+    flex:1;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+  .market-line-top{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+  }
   .market-line-name{
     font-weight:650;
     font-size:0.92rem;
     color:var(--navy-950);
-    width:150px;
+    width:130px;
     flex-shrink:0;
   }
   .market-line-value{
     font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
     font-size:1.3rem;
     color:var(--navy-950);
-    flex:1;
   }
   .market-line-change{
     display:inline-flex;
@@ -251,11 +268,15 @@
     gap:4px;
     font-size:0.86rem;
     font-weight:650;
-    margin-right:6px;
+    margin-left:auto;
   }
   .market-line-change.up{ color:#237a4b; }
   .market-line-change.down{ color:#b23b3b; }
   .market-line-change svg{ width:12px; height:12px; }
+  .market-line-range{
+    font-size:0.74rem;
+    color:var(--navy-300);
+  }
   .market-line.compact{
     padding:8px 22px;
     gap:12px;
@@ -267,7 +288,7 @@
   }
   .market-line.compact .market-line-name{
     font-size:0.84rem;
-    width:110px;
+    width:100px;
   }
   .market-line.compact .market-line-value{
     font-size:1rem;
@@ -276,6 +297,9 @@
   }
   .market-line.compact .market-line-change{
     font-size:0.78rem;
+  }
+  .market-line.compact .market-line-range{
+    font-size:0.7rem;
   }
   .market-line.compact .market-line-chevron{
     width:14px; height:14px;
@@ -294,68 +318,82 @@
     margin-top:14px;
   }
 
-  /* Bookmarks — grouped compact cards, same row pattern as weather/markets */
-  .bookmark-groups{
+  /* Bookmarks — tight card grid, 4 per row */
+  .bookmark-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
   }
-  .bookmark-group{
+  .bookmark-tile{
     background:var(--paper);
     border:1px solid var(--line);
-    border-radius:var(--radius);
+    border-radius:14px;
     box-shadow:var(--shadow);
     overflow:hidden;
   }
-  .bookmark-group-title{
-    padding:14px 22px;
-    font-size:0.72rem;
+  .bookmark-tile-title{
+    padding:8px 13px;
+    font-size:0.62rem;
     text-transform:uppercase;
-    letter-spacing:0.07em;
+    letter-spacing:0.05em;
     font-weight:700;
+    line-height:1.3;
     color:var(--paper);
     background:var(--navy-950);
     margin:0;
   }
-  .bookmark-line{
+  .bookmark-tile-line{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:12px 22px;
+    gap:8px;
+    padding:7px 13px;
     border-bottom:1px solid var(--line);
     text-decoration:none;
     color:inherit;
     cursor:pointer;
+    font-size:0.8rem;
     transition:background-color 0.15s ease;
   }
-  .bookmark-line:last-child{ border-bottom:none; }
-  .bookmark-line:hover{ background-color:var(--paper-soft); }
-  .bookmark-line:hover .bookmark-line-name{ color:var(--navy-700); }
-  .bookmark-line-dot{
-    width:6px; height:6px;
+  .bookmark-tile-line:last-child{ border-bottom:none; }
+  .bookmark-tile-line:hover{ background-color:var(--paper-soft); }
+  .bookmark-tile-line:hover .bookmark-tile-name{ color:var(--navy-700); }
+  .bookmark-tile-dot{
+    width:5px; height:5px;
     border-radius:50%;
     background:var(--gold);
     flex-shrink:0;
   }
-  .bookmark-line-name{
-    font-size:0.9rem;
+  .bookmark-tile-name{
     font-weight:600;
     color:var(--navy-950);
     flex:1;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
-  .bookmark-line-chevron{
-    width:14px; height:14px;
+  .bookmark-tile-chevron{
+    width:11px; height:11px;
     stroke:var(--navy-300);
     fill:none;
     flex-shrink:0;
     transition:transform 0.15s ease, stroke 0.15s ease;
   }
-  .bookmark-line:hover .bookmark-line-chevron{ stroke:var(--navy-500); transform:translateX(2px); }
-  .bookmark-empty{
-    padding:14px 22px;
-    font-size:0.82rem;
+  .bookmark-tile-line:hover .bookmark-tile-chevron{ stroke:var(--navy-500); transform:translateX(2px); }
+  .bookmark-tile-empty{
+    padding:9px 13px;
+    font-size:0.74rem;
     color:var(--navy-300);
     font-style:italic;
+  }
+  @media (max-width:1024px){
+    .bookmark-grid{ grid-template-columns:repeat(3,1fr); }
+  }
+  @media (max-width:700px){
+    .bookmark-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:460px){
+    .bookmark-grid{ grid-template-columns:1fr; }
   }
 
   /* Chiefs schedule */
@@ -376,7 +414,7 @@
     min-width:640px;
   }
   .chiefs-table thead th{
-    background:var(--navy-950);
+    background:var(--chiefs-red);
     color:var(--paper);
     padding:10px 16px;
     text-align:left;
@@ -443,7 +481,7 @@
     font-size:0.84rem;
   }
   .standings-table thead th{
-    background:var(--navy-950);
+    background:var(--chiefs-red);
     color:var(--paper);
     padding:9px 16px;
     text-align:left;
@@ -459,7 +497,7 @@
   }
   .standings-table tbody tr:last-child td{ border-bottom:none; }
   .standings-table tbody tr.standings-kc td{
-    background:var(--paper-soft);
+    background:rgba(255,184,28,0.16);
     font-weight:700;
   }
   .standings-table .num{ text-align:center; }
@@ -470,6 +508,17 @@
     border-radius:var(--radius);
     box-shadow:var(--shadow);
     overflow:hidden;
+    position:relative;
+    padding-top:8px;
+  }
+  .chiefs-details::before{
+    content:"";
+    display:block;
+    position:absolute;
+    top:0; left:0; right:0;
+    height:8px;
+    width:100%;
+    background-image: repeating-linear-gradient(135deg, var(--chiefs-red) 0 12px, var(--chiefs-gold) 12px 24px);
   }
   .chiefs-summary{
     display:flex;
@@ -480,12 +529,12 @@
     list-style:none;
   }
   .chiefs-summary::-webkit-details-marker{ display:none; }
-  .chiefs-summary:hover{ background-color:var(--paper-soft); }
+  .chiefs-summary:hover{ background-color:var(--chiefs-wash); }
   .chiefs-summary-badge{
     flex-shrink:0;
     width:40px; height:40px;
     border-radius:11px;
-    background:var(--navy-950);
+    background:var(--chiefs-red);
     color:var(--paper);
     display:flex; align-items:center; justify-content:center;
     font-size:0.6rem;
@@ -503,7 +552,7 @@
     font-size:0.68rem;
     text-transform:uppercase;
     letter-spacing:0.07em;
-    color:var(--gold);
+    color:var(--chiefs-gold-deep);
     font-weight:700;
   }
   .chiefs-summary-opp{
@@ -539,20 +588,12 @@
     border:1px solid var(--line);
   }
 
-  footer{
-    text-align:center;
-    padding:30px 20px 46px;
-    color:var(--navy-300);
-    font-size:0.78rem;
-  }
-
   @media (max-width: 880px){
     .market-line{ flex-wrap:wrap; gap:8px 14px; padding:14px 18px; }
     .market-line-name{ width:auto; }
     .market-line-value{ flex:1 1 auto; }
     .weather-line{ padding:14px 18px; }
     .weather-line-temp{ width:auto; }
-    .bookmark-groups{ grid-template-columns:1fr; }
     .clock-line{ flex-direction:column; gap:2px; }
     .clock-sep{ display:none; }
   }
@@ -560,6 +601,22 @@
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; animation:none !important; }
   }
+
+  .page-footer-link{
+    text-align:center;
+    padding:26px 20px 40px;
+  }
+  .page-footer-link a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--navy-500);
+    text-decoration:none;
+  }
+  .page-footer-link a:hover{ color:var(--navy-700); text-decoration:underline; }
+  .page-footer-link svg{ width:16px; height:16px; stroke:currentColor; fill:none; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -576,10 +633,254 @@
     </div>
   </div>
 </header>
-
-<!-- Weather band -->
-<section class="band" style="padding-top:28px; padding-bottom:28px;">
+<!-- Bookmarks band -->
+<section class="band">
   <div class="band-inner">
+    <div class="band-head">
+      <div class="band-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div>
+        <p class="band-title">Bookmarks</p>
+        <p class="band-sub">Grouped links for quick access</p>
+      </div>
+    </div>
+
+    <div class="bookmark-grid">
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Apple</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Apple Account Online</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">AppleInsider</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">iCloud</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Mac Power Users</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Macworld</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Artificial Intelligence</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">ChatGPT</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Claude</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Google Gemini</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Castle Rock Specialty Group</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Apple Business</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Bank of America Small Business</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Intacct Accounting</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="https://www.micmservices.com" target="_blank" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">MCMS</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Paychex</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Verizon Commercial</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="https://email.castlerocksp.com" target="_blank" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Webmail</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Insurance</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Homeowners / Auto / UMB</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Jewelry Insurance</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Life Insurance Katie</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Life Insurance Kevin</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Medical Insurance - BCBSM</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Katie's Corner</p>
+        <div class="bookmark-tile-empty">Links coming soon</div>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Liberty Christian</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Canva</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Liberty Parent Acct</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Liberty Tuition</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Subscriptions</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Amazon Prime</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Apple TV</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Disney+</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">HBO</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Hulu</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Netflix</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Prime TV</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">XM Radio</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">YouTube</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">YouTube TV</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <div class="bookmark-tile">
+        <p class="bookmark-tile-title">Utilities</p>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Energy</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Security System</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Verizon Wireless</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+        <a class="bookmark-tile-line" href="#" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Water Waste Trash</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- Weather band -->
+<section class="band tint" style="padding-top:28px; padding-bottom:28px;">
+  <div class="band-inner">
+    <div class="band-head">
+      <div class="band-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
+      </div>
+      <div>
+        <p class="band-title">Current Weather</p>
+      </div>
+    </div>
     <div class="weather-compact">
 
       <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=33.1032&lon=-97.1886" target="_blank" rel="noopener">
@@ -616,23 +917,6 @@
         <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=46.0522&lon=-89.5498" target="_blank" rel="noopener">
-        <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-        <div class="weather-line-main">
-          <div class="weather-line-top">
-            <span class="weather-line-city">Sayner, WI</span>
-            <span class="weather-line-desc">Clear</span>
-          </div>
-          <div class="weather-line-meta">
-            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg>Wind 6 mph</span>
-            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg>7:05a – 6:52p</span>
-            <span class="weather-line-hilo">H73° / L51°</span>
-          </div>
-        </div>
-        <span class="weather-line-temp">59°</span>
-        <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
       <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=38.9822&lon=-94.6708" target="_blank" rel="noopener">
         <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
         <div class="weather-line-main">
@@ -650,20 +934,20 @@
         <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=38.2278&lon=-92.9704" target="_blank" rel="noopener">
-        <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
+      <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=46.0522&lon=-89.5498" target="_blank" rel="noopener">
+        <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
         <div class="weather-line-main">
           <div class="weather-line-top">
-            <span class="weather-line-city">Sunrise Beach, MO</span>
-            <span class="weather-line-desc">Clear with periodic clouds</span>
+            <span class="weather-line-city">Sayner, WI</span>
+            <span class="weather-line-desc">Clear</span>
           </div>
           <div class="weather-line-meta">
-            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg>Wind 7 mph</span>
-            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg>7:03a – 7:05p</span>
-            <span class="weather-line-hilo">H80° / L59°</span>
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg>Wind 6 mph</span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg>7:05a – 6:52p</span>
+            <span class="weather-line-hilo">H73° / L51°</span>
           </div>
         </div>
-        <span class="weather-line-temp">67°</span>
+        <span class="weather-line-temp">59°</span>
         <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
@@ -684,6 +968,23 @@
         <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
+      <a class="weather-line" href="https://forecast.weather.gov/MapClick.php?lat=38.2278&lon=-92.9704" target="_blank" rel="noopener">
+        <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
+        <div class="weather-line-main">
+          <div class="weather-line-top">
+            <span class="weather-line-city">Sunrise Beach, MO</span>
+            <span class="weather-line-desc">Clear with periodic clouds</span>
+          </div>
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg>Wind 7 mph</span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg>7:03a – 7:05p</span>
+            <span class="weather-line-hilo">H80° / L59°</span>
+          </div>
+        </div>
+        <span class="weather-line-temp">67°</span>
+        <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
       <a class="weather-line" href="https://www.youtube.com/@MaxVelocityWX" target="_blank" rel="noopener">
         <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 6.5s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.4 3 12 3 12 3h0s-4.4 0-7.3.2c-.4 0-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S1.3 8.4 1.3 10.3v1.9c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.2 7.6.2s4.4 0 7.3-.2c.4 0 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.9c0-1.9-.2-3.8-.2-3.8z"/><path d="M9.8 14.5l5.8-3.2-5.8-3.2v6.4z" fill="currentColor" stroke="none"/></svg>
         <div class="weather-line-main">
@@ -700,66 +1001,9 @@
   </div>
 </section>
 
-<!-- Bookmarks band -->
-<section class="band tint">
-  <div class="band-inner">
-    <div class="band-head">
-      <div class="band-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <div>
-        <p class="band-title">Bookmarks</p>
-        <p class="band-sub">Grouped links for quick access</p>
-      </div>
-    </div>
-
-    <div class="bookmark-groups">
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Castle Rock Specialty Group</p>
-        <a class="bookmark-line" href="https://email.castlerocksp.com" target="_blank" rel="noopener">
-          <span class="bookmark-line-dot"></span>
-          <span class="bookmark-line-name">Webmail</span>
-          <svg class="bookmark-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-        <a class="bookmark-line" href="https://www.micmservices.com" target="_blank" rel="noopener">
-          <span class="bookmark-line-dot"></span>
-          <span class="bookmark-line-name">MCMS</span>
-          <svg class="bookmark-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-      </div>
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Apple</p>
-        <div class="bookmark-empty">Links coming soon</div>
-      </div>
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Utilities</p>
-        <div class="bookmark-empty">Links coming soon</div>
-      </div>
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Subscriptions</p>
-        <div class="bookmark-empty">Links coming soon</div>
-      </div>
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Insurance</p>
-        <div class="bookmark-empty">Links coming soon</div>
-      </div>
-
-      <div class="bookmark-group">
-        <p class="bookmark-group-title">Liberty Christian</p>
-        <div class="bookmark-empty">Links coming soon</div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- Markets band -->
-<section class="band tint" style="padding-top:28px; padding-bottom:28px;">
+<section class="band" style="padding-top:28px; padding-bottom:28px;">
   <div class="band-inner">
     <div class="band-head">
       <div class="band-icon">
@@ -773,47 +1017,67 @@
 
     <!-- Overall market -->
     <div class="market-compact">
-      <a class="market-line" href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank" rel="noopener">
-        <span class="market-line-symbol">SPX</span>
-        <span class="market-line-name">S&amp;P 500</span>
-        <span class="market-line-value">6,481.20</span>
-        <span class="market-line-change up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-          +0.62%
-        </span>
-        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a class="market-line" href="https://www.google.com/finance/quote/.DJI:INDEXDJX" target="_blank" rel="noopener">
+      <a class="market-line compact" href="https://www.google.com/finance/quote/.DJI:INDEXDJX" target="_blank" rel="noopener">
         <span class="market-line-symbol">DJI</span>
-        <span class="market-line-name">Dow Jones</span>
-        <span class="market-line-value">44,910</span>
-        <span class="market-line-change up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-          +0.31%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Dow Jones</span>
+            <span class="market-line-value">44,910</span>
+            <span class="market-line-change up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              +0.31%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 43,180 – 45,310</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <a class="market-line" href="https://www.google.com/finance/quote/.IXIC:INDEXNASDAQ" target="_blank" rel="noopener">
+      <a class="market-line compact" href="https://www.google.com/finance/quote/.IXIC:INDEXNASDAQ" target="_blank" rel="noopener">
         <span class="market-line-symbol">IXIC</span>
-        <span class="market-line-name">Nasdaq</span>
-        <span class="market-line-value">21,650</span>
-        <span class="market-line-change down">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          -0.18%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Nasdaq</span>
+            <span class="market-line-value">21,650</span>
+            <span class="market-line-change down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              -0.18%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 20,640 – 21,980</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
-      <a class="market-line" href="https://www.google.com/finance/quote/RUT:INDEXRUSSELL" target="_blank" rel="noopener">
+      <a class="market-line compact" href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank" rel="noopener">
+        <span class="market-line-symbol">SPX</span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">S&amp;P 500</span>
+            <span class="market-line-value">6,481.20</span>
+            <span class="market-line-change up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              +0.62%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 6,285 – 6,520</div>
+        </div>
+        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a class="market-line compact" href="https://www.google.com/finance/quote/RUT:INDEXRUSSELL" target="_blank" rel="noopener">
         <span class="market-line-symbol">RUT</span>
-        <span class="market-line-name">Russell 2000</span>
-        <span class="market-line-value">2,312.5</span>
-        <span class="market-line-change up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-          +0.95%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Russell 2000</span>
+            <span class="market-line-value">2,312.5</span>
+            <span class="market-line-change up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              +0.95%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 2,198 – 2,340</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
     </div>
@@ -823,50 +1087,64 @@
     <div class="market-compact">
       <a class="market-line compact" href="https://www.google.com/finance/quote/AAPL:NASDAQ" target="_blank" rel="noopener">
         <span class="market-line-symbol">AAPL</span>
-        <span class="market-line-name">Apple</span>
-        <span class="market-line-value">228.40</span>
-        <span class="market-line-change up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-          +1.05%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Apple</span>
+            <span class="market-line-value">228.40</span>
+            <span class="market-line-change up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              +1.05%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 212.15 – 232.80</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
       <a class="market-line compact" href="https://www.google.com/finance/quote/MSFT:NASDAQ" target="_blank" rel="noopener">
         <span class="market-line-symbol">MSFT</span>
-        <span class="market-line-name">Microsoft</span>
-        <span class="market-line-value">512.18</span>
-        <span class="market-line-change down">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          -0.22%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Microsoft</span>
+            <span class="market-line-value">512.18</span>
+            <span class="market-line-change down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              -0.22%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 495.30 – 524.60</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
       <a class="market-line compact" href="https://www.google.com/finance/quote/NVDA:NASDAQ" target="_blank" rel="noopener">
         <span class="market-line-symbol">NVDA</span>
-        <span class="market-line-name">Nvidia</span>
-        <span class="market-line-value">184.72</span>
-        <span class="market-line-change up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-          +2.14%
-        </span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">Nvidia</span>
+            <span class="market-line-value">184.72</span>
+            <span class="market-line-change up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              +2.14%
+            </span>
+          </div>
+          <div class="market-line-range">30-day range: 168.40 – 191.05</div>
+        </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
     </div>
-    <p class="market-note">Placeholder tickers &amp; prices — tell me which stocks to track and I'll swap these in. Click any row to open the full quote on Google Finance.</p>
   </div>
 </section>
 
 <!-- Chiefs schedule band -->
-<section class="band" style="padding-top:28px; padding-bottom:28px;">
+<section class="band" style="padding-top:28px; padding-bottom:28px; background:var(--chiefs-wash);">
   <div class="band-inner">
     <div class="band-head">
-      <div class="band-icon">
+      <div class="band-icon" style="background:var(--chiefs-red);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6-6 6 6M12 3v18M4 21h16"/></svg>
       </div>
       <div>
-        <p class="band-title">Kansas City Chiefs</p>
+        <p class="band-title" style="color:var(--chiefs-red);">Kansas City Chiefs</p>
         <p class="band-sub">2026 season</p>
       </div>
     </div>
@@ -1094,10 +1372,12 @@
   </div>
 </section>
 
-
-<footer>
-  Made for the family &middot; edit the placeholders in this file to make it yours &middot; <span id="lastUpdated"></span>
-</footer>
+<div class="page-footer-link">
+  <a href="https://github.com/dashboard" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+    GitHub
+  </a>
+</div>
 
 <script>
   function pad(n){ return n.toString().padStart(2,'0'); }
@@ -1122,7 +1402,6 @@
     };
     document.getElementById('clockDate').textContent = now.toLocaleDateString('en-US', dateOpts);
 
-    document.getElementById('lastUpdated').textContent = 'Last updated ' + now.toLocaleTimeString('en-US', {timeZone: 'America/Chicago', hour:'numeric', minute:'2-digit'});
 
     const marketSub = document.getElementById('marketSub');
     if(marketSub){
