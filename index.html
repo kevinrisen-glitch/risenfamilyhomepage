@@ -6,7 +6,7 @@
 <title>Risen Family Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy-950:#0e1a33;
@@ -154,10 +154,11 @@
     overflow:hidden;
   }
   .weather-line{
-    display:flex;
+    display:grid;
+    grid-template-columns:24px 1fr 48px minmax(70px,auto) 16px;
     align-items:center;
-    gap:16px;
-    padding:13px 22px;
+    gap:10px;
+    padding:10px 16px;
     border-bottom:1px solid var(--line);
     text-decoration:none;
     color:inherit;
@@ -173,45 +174,40 @@
   .weather-line:last-child{ border-bottom:none; }
   .weather-line:hover{ background-color:var(--paper-soft); }
   .weather-line:hover .weather-line-city{ color:var(--navy-700); }
-  .weather-line-icon{ width:28px; height:28px; stroke:var(--gold); fill:none; flex-shrink:0; }
+  .weather-line-icon{ width:20px; height:20px; stroke:var(--gold); fill:none; flex-shrink:0; }
   .weather-line-chevron{
-    width:16px; height:16px;
+    width:14px; height:14px;
     stroke:var(--navy-300);
     fill:none;
     flex-shrink:0;
     transition:transform 0.15s ease, stroke 0.15s ease;
   }
-  .weather-line:hover .weather-line-chevron{ stroke:var(--navy-500); transform:translateX(2px); }
+  .weather-line:hover .weather-line-chevron{ stroke:var(--navy-500); }
   .weather-acc-item[open] .weather-line-chevron{ transform:rotate(90deg); stroke:var(--navy-500); }
-  .weather-line-main{
-    flex:1;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:3px;
-  }
-  .weather-line-top{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    flex-wrap:wrap;
-  }
   .weather-line-city{
     font-weight:650;
-    font-size:0.92rem;
+    font-size:0.86rem;
     color:var(--navy-950);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .weather-line-desc{
     color:var(--navy-300);
-    font-size:0.8rem;
+    font-size:0.72rem;
+    text-align:right;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .weather-line-meta{
     display:flex;
     align-items:center;
     gap:14px;
     flex-wrap:wrap;
-    font-size:0.74rem;
+    font-size:0.78rem;
     color:var(--navy-500);
+    padding:0 22px 12px;
   }
   .weather-line-meta span{ display:inline-flex; align-items:center; gap:4px; }
   .weather-line-meta svg{ width:12px; height:12px; stroke:var(--navy-300); fill:none; flex-shrink:0; }
@@ -296,11 +292,9 @@
   .weather-line-hilo{ font-weight:600; }
   .weather-line-temp{
     font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
-    font-size:1.5rem;
+    font-size:1.15rem;
     color:var(--navy-950);
-    width:64px;
     text-align:right;
-    flex-shrink:0;
   }
 
   /* Weather accordion — expanded forecast panel */
@@ -370,10 +364,11 @@
     margin:0 0 10px;
   }
   .market-line{
-    display:flex;
+    display:grid;
+    grid-template-columns:26px 1fr 64px 58px 14px;
     align-items:center;
-    gap:16px;
-    padding:14px 22px;
+    gap:10px;
+    padding:8px 16px;
     border-bottom:1px solid var(--line);
     text-decoration:none;
     color:inherit;
@@ -384,91 +379,53 @@
   .market-line:hover{ background-color:var(--paper-soft); }
   .market-line:hover .market-line-name{ color:var(--navy-700); }
   .market-line-symbol{
-    width:34px; height:34px;
-    border-radius:9px;
+    width:22px; height:22px;
+    border-radius:6px;
     background:var(--navy-950);
     color:var(--paper);
     display:flex; align-items:center; justify-content:center;
-    font-size:0.66rem;
+    font-size:0.48rem;
     font-weight:700;
     letter-spacing:0.01em;
     flex-shrink:0;
   }
-  .market-line-main{
-    flex:1;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:3px;
-  }
-  .market-line-top{
-    display:flex;
-    align-items:baseline;
-    gap:12px;
-    flex-wrap:wrap;
-  }
+  .market-line-main{ display:contents; }
+  .market-line-top{ display:contents; }
   .market-line-name{
     font-weight:650;
-    font-size:0.92rem;
+    font-size:0.8rem;
     color:var(--navy-950);
-    width:130px;
-    flex-shrink:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .market-line-value{
-    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
-    font-size:1.3rem;
+    font-family:inherit;
+    font-size:0.88rem;
+    font-weight:600;
     color:var(--navy-950);
+    text-align:right;
   }
   .market-line-change{
     display:inline-flex;
     align-items:center;
-    gap:4px;
-    font-size:0.86rem;
+    justify-content:flex-end;
+    gap:3px;
+    font-size:0.72rem;
     font-weight:650;
-    margin-left:auto;
   }
   .market-line-change.up{ color:#237a4b; }
   .market-line-change.down{ color:#b23b3b; }
-  .market-line-change svg{ width:12px; height:12px; }
-  .market-line-range{
-    font-size:0.74rem;
-    color:var(--navy-300);
-  }
-  .market-line.compact{
-    padding:8px 22px;
-    gap:12px;
-  }
-  .market-line.compact .market-line-symbol{
-    width:26px; height:26px;
-    border-radius:7px;
-    font-size:0.56rem;
-  }
-  .market-line.compact .market-line-name{
-    font-size:0.84rem;
-    width:100px;
-  }
-  .market-line.compact .market-line-value{
-    font-size:1rem;
-    font-family:inherit;
-    font-weight:600;
-  }
-  .market-line.compact .market-line-change{
-    font-size:0.78rem;
-  }
-  .market-line.compact .market-line-range{
-    font-size:0.7rem;
-  }
-  .market-line.compact .market-line-chevron{
-    width:14px; height:14px;
-  }
+  .market-line-change svg{ width:10px; height:10px; }
+  .market-line-range{ display:none; }
   .market-line-chevron{
-    width:16px; height:16px;
+    width:13px; height:13px;
     stroke:var(--navy-300);
     fill:none;
     flex-shrink:0;
-    transition:transform 0.15s ease, stroke 0.15s ease;
+    transition:stroke 0.15s ease;
   }
-  .market-line:hover .market-line-chevron{ stroke:var(--navy-500); transform:translateX(2px); }
+  .market-line:hover .market-line-chevron{ stroke:var(--navy-500); }
   .market-note{
     font-size:0.78rem;
     color:var(--navy-300);
@@ -1050,6 +1007,8 @@
     border-radius:100px;
   }
   .angels-status.upcoming{ color:var(--angels-gold-deep); background:#fff6df; }
+  .angels-status.now{ color:#fff; background:var(--angels-gold-deep); }
+  .angels-table tr.angels-now td{ font-weight:600; }
   .angels-status.flown{ color:var(--navy-300); background:var(--paper-soft); }
   .angels-note{
     font-size:0.78rem;
@@ -1173,6 +1132,8 @@
     border-radius:100px;
   }
   .pga-status.upcoming{ color:var(--gold); background:#faf3e6; }
+  .pga-status.now{ color:#fff; background:var(--gold); }
+  .pga-table tr.pga-now td{ font-weight:600; }
   .pga-status.flown{ color:var(--navy-300); background:var(--paper-soft); }
   .pga-win{
     display:inline-block;
@@ -1312,11 +1273,11 @@
   }
 
   @media (max-width: 880px){
-    .market-line{ flex-wrap:wrap; gap:8px 14px; padding:14px 18px; }
-    .market-line-name{ width:auto; }
-    .market-line-value{ flex:1 1 auto; }
-    .weather-line{ padding:14px 18px; }
-    .weather-line-temp{ width:auto; }
+    .market-line{ grid-template-columns:22px 1fr 56px 14px; padding:10px 14px; }
+    .market-line-change{ display:none; }
+    .weather-line{ grid-template-columns:22px 1fr 44px; padding:12px 14px; }
+    .weather-line-desc{ display:none; }
+    .weather-line-chevron{ display:none; }
     .clock-line{ flex-direction:column; gap:2px; }
     .clock-sep{ display:none; }
   }
@@ -1346,15 +1307,240 @@
     font-size:0.68rem;
     color:var(--navy-300);
   }
+
+  /* ================= Theme C: soft cards on pale blue ================= */
+  :root{
+    --page-blue:#eaf0fa;
+    --pga-wash:#ffffff;
+    --card-line:#dbe4f3;
+    --radius:18px;
+    --shadow:none;
+  }
+  body{ background:var(--page-blue); font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif; }
+  .display{ font-family:inherit; }
+  header.top{ background:transparent; color:var(--navy-950); padding:44px 7vw 14px; overflow:visible; }
+  header.top::after{ display:none; }
+  h1.greeting{
+    font-family:'Inter','Segoe UI',system-ui,sans-serif;
+    font-size:clamp(1.9rem,4.2vw,2.6rem);
+    font-weight:600;
+    letter-spacing:-0.025em;
+    color:var(--navy-950);
+  }
+  .clock-line{
+    background:var(--navy-950);
+    color:#fff;
+    border-radius:999px;
+    padding:6px 18px;
+    align-items:center;
+    gap:8px;
+  }
+  .clock-time{ font-family:inherit; font-size:0.95rem; font-weight:500; color:#fff; }
+  .clock-sep{ color:var(--navy-300); }
+  .clock-date{ font-size:0.88rem; color:var(--navy-100); }
+
+  .band{ background:transparent; border-bottom:none; padding:14px 5vw; }
+  .band.tint{ background:transparent; }
+  .band[style*="padding-top:28px"]{ padding-top:14px !important; padding-bottom:14px !important; }
+  .band[style*="wash"]{
+    background:var(--chiefs-wash);
+    margin:14px 5vw;
+    padding:22px 24px !important;
+    border-radius:22px;
+    border:1px solid var(--card-line);
+  }
+  .band[style*="wash"] .band-inner{ max-width:none; }
+  .band-head{ margin-bottom:14px; }
+  .band-icon{ width:34px; height:34px; border-radius:50%; background:#fff; border:1px solid var(--card-line); }
+  .band-icon svg{ stroke:var(--navy-700); }
+  .band-icon[style]{ border:none; }
+  .band-icon[style] svg{ stroke:#fff; }
+  .band-title{ font-size:1.05rem; font-weight:600; letter-spacing:-0.01em; }
+
+  .bookmark-tile, .weather-compact, .stocks-card, .chiefs-card, .bananas-card, .angels-card, .pga-card, .traffic-card, .photo-card, .flights-board{
+    border:1px solid var(--card-line);
+    border-radius:18px;
+    box-shadow:none;
+  }
+  .bookmark-tile-title{
+    background:#fff;
+    color:var(--navy-950);
+    font-size:0.86rem;
+    text-transform:none;
+    letter-spacing:0;
+    font-weight:600;
+    padding:12px 16px 8px;
+  }
+  .bookmark-tile-line{ padding:7px 16px; border-bottom-color:#eef2f9; }
+  .weather-line, .weather-acc-item{ border-bottom-color:#eef2f9; }
+  details.chiefs-details, details.bananas-details, details.angels-details, details.pga-details{
+    border-radius:18px;
+  }
+  .band-official-link{ font-weight:500; }
+  .page-last-updated{ color:var(--navy-300); }
+
+  /* ---- Weather: current + high/low + next days ---- */
+  .weather-acc-item .weather-line{
+    grid-template-columns:26px 1fr auto minmax(120px,auto) 16px;
+    row-gap:8px;
+    padding:12px 18px;
+  }
+  .weather-line-temp{ font-size:1.35rem; font-weight:600; letter-spacing:-0.02em; color:var(--navy-950); text-align:right; }
+  .weather-line-cond{ display:flex; flex-direction:column; align-items:flex-end; gap:1px; text-align:right; }
+  .weather-line-hl{ font-size:0.74rem; font-weight:500; color:var(--navy-500); font-variant-numeric:tabular-nums; }
+  .wx-strip{
+    grid-column:2 / 5;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:6px;
+  }
+  .wx-day{
+    background:var(--paper-soft);
+    border-radius:10px;
+    padding:6px 4px;
+    text-align:center;
+    font-size:0.72rem;
+    line-height:1.35;
+    color:var(--navy-500);
+  }
+  .wx-day b{ display:block; font-weight:600; color:var(--navy-950); font-size:0.74rem; }
+  .wx-day .hi{ color:var(--navy-950); font-weight:600; }
+  .wx-day .lo{ color:var(--navy-300); }
+  .wx-day .pp{ display:block; color:var(--navy-300); font-size:0.66rem; }
+  .weather-line-temp{ font-family:inherit; font-variant-numeric:tabular-nums; }
+  .weather-acc-item[open] .wx-day{ background:#fff; }
+  .wx-na{ color:var(--navy-300); font-size:0.8rem; padding:10px 0; }
+  @media (max-width:620px){
+    .weather-acc-item .weather-line{ grid-template-columns:24px 1fr auto 14px; }
+    .weather-line-cond{ grid-column:2 / 4; grid-row:2; align-items:flex-start; text-align:left; flex-direction:row; gap:8px; }
+    .wx-strip{ grid-column:1 / -1; }
+  }
+
+  /* ---- Three-month calendar band ---- */
+  .cal-row{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .mini-cal{
+    background:#fff;
+    border:1px solid var(--card-line);
+    border-radius:18px;
+    padding:14px 16px 12px;
+    font-size:0.8rem;
+    color:var(--navy-950);
+  }
+  .mini-cal-title{ text-align:center; font-weight:600; font-size:0.95rem; margin:0 0 10px; letter-spacing:-0.01em; }
+  .mini-cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:3px; text-align:center; }
+  .mini-cal-dow{ color:var(--navy-300); font-weight:500; font-size:0.7rem; padding-bottom:4px; }
+  .mini-cal-day{ height:30px; width:30px; margin:0 auto; display:flex; align-items:center; justify-content:center; border-radius:50%; font-variant-numeric:tabular-nums; }
+  .mini-cal-day.today{ background:var(--navy-950); color:#fff; font-weight:600; }
+  .mini-cal-day.wkend{ color:var(--navy-500); }
+  @media (max-width:900px){ .cal-row{ grid-template-columns:1fr; } .mini-cal{ max-width:360px; width:100%; margin:0 auto; } }
+  .market-line-value.weather-value-na{ white-space:nowrap; font-size:0.74rem; }
+  .wx-webcam{
+    display:inline-flex; align-items:center; gap:5px;
+    margin-left:10px; padding:2px 10px;
+    font-size:0.72rem; font-weight:500;
+    color:var(--navy-700); background:var(--page-blue);
+    border:1px solid var(--card-line); border-radius:999px;
+    text-decoration:none; vertical-align:middle;
+  }
+  .wx-webcam svg{ width:13px; height:13px; }
+  .wx-webcam:hover{ background:var(--navy-950); color:#fff; border-color:var(--navy-950); }
+
+  /* ---- Chiefs: results + schedule ---- */
+  .cs-stats{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:14px; }
+  .cs-stat{ background:#fff; border:1px solid var(--card-line); border-radius:14px; padding:10px 14px; }
+  .cs-stat-label{ font-size:0.72rem; color:var(--navy-300); margin:0 0 2px; }
+  .cs-stat-value{ font-size:1.25rem; font-weight:600; letter-spacing:-0.02em; color:var(--navy-950); margin:0; }
+  .cs-stat-value small{ font-size:0.76rem; font-weight:500; color:var(--navy-500); letter-spacing:0; }
+  .cs-cols{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; align-items:start; }
+  .cs-col{ background:#fff; border:1px solid var(--card-line); border-radius:16px; overflow:hidden; }
+  .cs-col-title{ margin:0; padding:11px 16px; font-size:0.86rem; font-weight:600; color:var(--navy-950); border-bottom:1px solid var(--card-line); display:flex; justify-content:space-between; }
+  .cs-col-title span{ font-weight:500; color:var(--navy-300); font-size:0.76rem; }
+  .cs-row{ display:grid; grid-template-columns:30px 1fr auto; align-items:center; gap:10px; padding:9px 16px; border-bottom:1px solid #eef2f9; font-size:0.84rem; }
+  .cs-row:last-child{ border-bottom:none; }
+  .cs-wk{ font-size:0.72rem; color:var(--navy-300); font-variant-numeric:tabular-nums; }
+  .cs-opp{ font-weight:600; color:var(--navy-950); min-width:0; }
+  .cs-opp .loc{ color:var(--navy-300); font-weight:500; font-size:0.74rem; margin-right:4px; }
+  .cs-sub{ display:block; font-size:0.72rem; font-weight:400; color:var(--navy-300); margin-top:1px; }
+  .cs-score{ font-variant-numeric:tabular-nums; font-weight:600; color:var(--navy-950); text-align:right; white-space:nowrap; }
+  .cs-score .chiefs-w, .cs-score .chiefs-l{ margin-right:6px; }
+  .cs-when{ text-align:right; font-size:0.76rem; color:var(--navy-500); line-height:1.35; white-space:nowrap; }
+  .cs-when b{ display:block; font-weight:600; color:var(--navy-950); }
+  .cs-row.next{ background:var(--chiefs-wash); outline:2px solid var(--chiefs-red); outline-offset:-2px; border-radius:12px; margin:8px; padding:11px 14px; }
+  .cs-row.next .cs-wk{ color:var(--chiefs-red); font-weight:600; }
+  .cs-row.bye{ grid-template-columns:30px 1fr; color:var(--navy-300); font-size:0.78rem; font-style:italic; }
+  .cs-row.pending .cs-score{ color:var(--navy-300); font-weight:500; font-size:0.76rem; }
+  .cs-empty{ padding:14px 16px; font-size:0.82rem; color:var(--navy-300); }
+  @media (max-width:760px){ .cs-cols{ grid-template-columns:1fr; } }
+  @media (max-width:560px){ .cs-stats{ grid-template-columns:1fr; } .cs-stat{ display:flex; justify-content:space-between; align-items:baseline; } }
+
+  /* ---- Compact sports sections ---- */
+  .band[style*="wash"]{ margin:8px 5vw; padding:12px 16px !important; border-radius:18px; }
+  .band[style*="wash"] .band-head, .band[style*="pga-wash"] .band-head{ margin-bottom:8px; }
+  .band[style*="pga-wash"]{ padding-top:12px !important; padding-bottom:12px !important; margin:8px 5vw; border-radius:18px; border:1px solid var(--card-line); }
+  .band[style*="wash"] .band-icon, .band[style*="pga-wash"] .band-icon{ width:28px; height:28px; }
+  .band[style*="wash"] .band-icon svg, .band[style*="pga-wash"] .band-icon svg{ width:15px; height:15px; }
+  .band[style*="wash"] .band-title, .band[style*="pga-wash"] .band-title{ font-size:0.96rem; }
+  .band[style*="wash"] .band-sub, .band[style*="pga-wash"] .band-sub{ display:inline; font-size:0.74rem; margin:0 8px 0 0; }
+  .band[style*="wash"] .band-official-link, .band[style*="pga-wash"] .band-official-link{ margin-top:0; font-size:0.72rem; }
+  .chiefs-summary, .bananas-summary, .angels-summary, .pga-summary{ padding:8px 14px !important; gap:10px !important; }
+  .chiefs-summary-badge, .bananas-summary-badge, .angels-summary-badge, .pga-summary-badge{ width:32px !important; height:32px !important; font-size:0.62rem !important; }
+  .chiefs-summary-opp, .bananas-summary-opp, .angels-summary-opp, .pga-summary-opp{ font-size:0.92rem !important; }
+  .chiefs-summary-meta, .bananas-summary-meta, .angels-summary-meta, .pga-summary-meta{ font-size:0.72rem !important; }
+  .chiefs-full, .bananas-full, .angels-full, .pga-full{ padding:10px 12px 12px !important; }
+  .chiefs-note, .bananas-note, .angels-note, .pga-note{ font-size:0.7rem; margin:6px 2px 0; line-height:1.4; }
+  .standings-heading, .pga-subheading{ margin:10px 0 5px !important; font-size:0.7rem; }
+  .bananas-table th, .angels-table th, .pga-table th, .standings-table th{ padding:5px 10px !important; font-size:0.62rem; }
+  .bananas-table td, .angels-table td, .pga-table td, .standings-table td{ padding:4px 10px !important; font-size:0.76rem; }
+  .cs-stats{ gap:6px; margin-bottom:8px; }
+  .cs-stat{ padding:5px 10px; border-radius:10px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .cs-stat-label{ margin:0; font-size:0.68rem; }
+  .cs-stat-value{ font-size:0.9rem; }
+  .cs-stat-value small{ font-size:0.68rem; }
+  .cs-cols{ gap:8px; }
+  .cs-col-title{ padding:6px 12px; font-size:0.78rem; }
+  .cs-row{ grid-template-columns:22px 1fr auto; gap:6px; padding:4px 12px; font-size:0.78rem; }
+  .cs-sub{ display:inline; margin-left:8px; font-size:0.68rem; }
+  .cs-when{ font-size:0.68rem; line-height:1.2; }
+  .cs-when b{ display:inline; margin-right:6px; font-size:0.74rem; }
+  .cs-row.next{ margin:4px; padding:6px 10px; border-radius:10px; }
+  .cs-row.bye{ grid-template-columns:22px 1fr; font-size:0.7rem; }
+  @media (min-width:1200px){
+    .pga-full{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto auto; grid-auto-flow:column; column-gap:12px; }
+    .pga-full > *{ min-width:0; }
+  }
+  .angels-table-wrap{ max-height:none !important; overflow-y:visible !important; }
+  .angels-table, .pga-table, .bananas-table{ min-width:0 !important; }
+  .pga-schedule td:last-child, .pga-schedule th:last-child{ white-space:nowrap; }
+  .pga-schedule td, .pga-schedule th{ padding:4px 6px !important; font-size:0.72rem !important; }
+  .pga-schedule .pga-status{ padding:2px 7px; font-size:0.6rem; }
+
+  /* ---- Weather: Option A, one line per city ---- */
+  .weather-acc-item .weather-line{
+    grid-template-columns:24px minmax(0,1.5fr) 50px 118px 82px minmax(80px,1fr) 16px;
+    row-gap:6px; padding:7px 16px; gap:8px;
+  }
+  .weather-line-temp{ font-size:1.02rem; text-align:left; }
+  .weather-line-hl{ font-size:0.78rem; text-align:left; color:var(--navy-500); white-space:nowrap; }
+  .weather-line-windline{ font-size:0.76rem; color:var(--navy-300); white-space:nowrap; }
+  .weather-line-desc{ text-align:right; font-size:0.76rem; white-space:nowrap; }
+  .weather-line-city{ font-size:0.84rem; }
+  .wx-strip{ grid-column:2 / -2; }
+  .weather-acc-item:not([open]) .wx-strip{ display:none; }
+  .weather-line-icon{ width:18px; height:18px; }
+  @media (max-width:700px){
+    .weather-acc-item .weather-line{ grid-template-columns:22px minmax(0,1fr) 44px auto 14px; }
+    .weather-line-windline, .weather-line-desc{ display:none; }
+    .weather-line-city{ white-space:normal; overflow:visible; text-overflow:clip; line-height:1.5; }
+    .wx-webcam{ margin-left:6px; }
+    .wx-strip{ grid-column:1 / -1; }
+  }
 </style>
 </head>
 <body>
 
-<div class="roofline"></div>
-
 <header class="top">
   <div class="top-inner">
-    <h1 class="greeting display">Risen Family HUB</h1>
+    <h1 class="greeting">Risen Family Hub</h1>
     <div class="clock-line">
       <span class="clock-time" id="clockTime">--:--</span>
       <span class="clock-sep">·</span>
@@ -1379,27 +1565,27 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Apple</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://account.apple.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Apple Account Online</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://appleinsider.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">AppleInsider</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.icloud.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">iCloud</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://relay.fm/mpu" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Mac Power Users</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.macworld.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Macworld</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1408,17 +1594,17 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Artificial Intelligence</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://chatgpt.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">ChatGPT</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.claude.ai" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Claude</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://gemini.google.com/app" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Google Gemini</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1427,17 +1613,17 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Castle Rock Specialty Group</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.apple.com/business/" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Apple Business</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.bankofamerica.com/business/" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Bank of America Small Business</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.sage.com/en-us/cp/demo-google/" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Intacct Accounting</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1447,17 +1633,17 @@
           <span class="bookmark-tile-name">MCMS Public Website</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.microsoft.com/en-us" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">MS Office Online</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.paychex.com/login" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Paychex</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://mblogin.verizonwireless.com/account/business/login/unifiedlogin?goto=http%3A%2F%2Fmblogin.verizonwireless.com%2Faccount%2Fbusiness%2Flogin%2Fpasskey&amp;appGroup=VZW" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Verizon Commercial</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1471,32 +1657,32 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Golf</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://greenroomargyle.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Argyle Green Room Simulator</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://dentoncc.org" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Denton Country Club</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://widget.perryweather.com/?id=79f4702f-8e0d-43b6-9f5c-1c5584c8243c" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Denton Country Club Weather Scan</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.ghin.com/login" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">GHIN</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.pgatour.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">PGA Tour</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://plumlakegolf.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Plum Lake Golf Club</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1505,27 +1691,27 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Insurance</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.usaa.com/?akredirect=true" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Homeowners / Auto / UMB</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://brite.co" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Jewelry Insurance</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.sbli.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Life Insurance Katie</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.ethos.com/life/ethos-term-life-insurance/" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Life Insurance Kevin</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.bcbsm.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Medical Insurance - BCBSM</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1534,37 +1720,41 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Katie's Corner</p>
-        <div class="bookmark-tile-empty">Links coming soon</div>
+        <a class="bookmark-tile-line" href="https://blomedry.com/blo-argyle/" target="_blank" rel="noopener">
+          <span class="bookmark-tile-dot"></span>
+          <span class="bookmark-tile-name">Argyle Blo Dry Bar</span>
+          <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
       </div>
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Kevin's Corner</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.clarkhoward.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Clark Howard</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.dealnews.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">DealNews</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.homedepot.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Home Depot</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.lowes.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Lowes</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.ug.link" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">UGREEN NAS</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://yardmastery.com/" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Yard Mastery</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1573,17 +1763,17 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Liberty Christian</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.canva.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Canva</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.libertychristian.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Liberty Parent Acct</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://parent.blackbaud.school/Login.aspx" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Liberty Tuition</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1592,57 +1782,57 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Subscriptions</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.primevideo.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Amazon Prime</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://tv.apple.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Apple TV</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.disneyplus.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Disney+</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.hbomax.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">HBO</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.hulu.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Hulu</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.netflix.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Netflix</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.plaud.ai" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Plaud</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.primevideo.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Prime TV</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.siriusxm.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">XM Radio</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.youtube.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">YouTube</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.tv.youtube.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">YouTube TV</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1651,42 +1841,42 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Travel</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.aa.com/homePage.do?locale=en_US" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">American Airlines</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.destingulfgate.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Destin Gulfgate</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.enterprise.com/en/home.html" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Enterprise Rental Car</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.google.com/flights" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Google Flights</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.marriott.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Marriott</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.nationalcar.com/en/home.html" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">National Rental Car</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.palaceresorts.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Palace Resorts</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.southwest.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Southwest Airlines</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1695,22 +1885,22 @@
 
       <div class="bookmark-tile">
         <p class="bookmark-tile-title">Utilities</p>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.coserv.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Energy</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://alert360.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Security System</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://www.verizon.com" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Verizon Wireless</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </a>
-        <a class="bookmark-tile-line" href="#" rel="noopener">
+        <a class="bookmark-tile-line" href="https://flowermoundtx.municipalonlinepayments.com/flowermoundtx" target="_blank" rel="noopener">
           <span class="bookmark-tile-dot"></span>
           <span class="bookmark-tile-name">Water Waste Trash</span>
           <svg class="bookmark-tile-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1723,6 +1913,22 @@
 </section>
 
 <!-- Photography band -->
+<!-- Calendar band -->
+<section class="band">
+  <div class="band-inner">
+    <div class="band-head">
+      <div class="band-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </div>
+      <div>
+        <p class="band-title">Calendar</p>
+        <p class="band-sub">This month and the next two</p>
+      </div>
+    </div>
+    <div class="cal-row" id="calRow" aria-label="Calendar for the next three months"></div>
+  </div>
+</section>
+
 <section class="band tint">
   <div class="band-inner">
     <div class="band-head">
@@ -1815,35 +2021,25 @@
 
       <details class="weather-acc-item" data-lat="33.1032" data-lon="-97.1886" data-key="argyle">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/><path d="M8 19v1M12 19v2M16 19v1"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Argyle, TX</span>
-              <span class="weather-line-desc">Light rain</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-argyle">Wind 8 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-argyle">7:12a – 7:08p</span></span>
-              <span class="weather-line-hilo">H93° / L73°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">82°</span>
+          <svg class="weather-line-icon" id="icon-argyle" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Argyle, TX</span>
+          <span class="weather-line-temp" id="temp-argyle">—</span>
+          <span class="weather-line-hl" id="hilo-argyle"></span>
+          <span class="weather-line-windline" id="windline-argyle"></span>
+          <span class="weather-line-desc" id="desc-argyle">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-argyle"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-argyle">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-argyle">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-argyle"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">93°</td><td class="num">73°</td><td class="num">15%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">90°</td><td class="num">72°</td><td class="num">10%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">88°</td><td class="num">73°</td><td class="num">20%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">75°</td><td class="num">71°</td><td class="num">75%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">79°</td><td class="num">70°</td><td class="num">75%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">78°</td><td class="num">70°</td><td class="num">20%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">76°</td><td class="num">63°</td><td class="num">20%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">75°</td><td class="num">54°</td><td class="num">10%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-argyle"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=33.1032&lon=-97.1886" target="_blank" rel="noopener">
@@ -1855,35 +2051,25 @@
 
       <details class="weather-acc-item" data-lat="40.4842" data-lon="-88.9937" data-key="bloomington">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Bloomington-Normal, IL</span>
-              <span class="weather-line-desc">Clear</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-bloomington">Wind 9 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-bloomington">7:03a – 6:47p</span></span>
-              <span class="weather-line-hilo">H75° / L48°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">57°</span>
+          <svg class="weather-line-icon" id="icon-bloomington" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Bloomington-Normal, IL</span>
+          <span class="weather-line-temp" id="temp-bloomington">—</span>
+          <span class="weather-line-hl" id="hilo-bloomington"></span>
+          <span class="weather-line-windline" id="windline-bloomington"></span>
+          <span class="weather-line-desc" id="desc-bloomington">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-bloomington"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-bloomington">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-bloomington">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-bloomington"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">75°</td><td class="num">48°</td><td class="num">10%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">79°</td><td class="num">52°</td><td class="num">10%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">74°</td><td class="num">63°</td><td class="num">60%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">78°</td><td class="num">62°</td><td class="num">40%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">65°</td><td class="num">51°</td><td class="num">75%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">69°</td><td class="num">51°</td><td class="num">0%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">69°</td><td class="num">43°</td><td class="num">0%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">63°</td><td class="num">38°</td><td class="num">0%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-bloomington"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=40.4842&lon=-88.9937" target="_blank" rel="noopener">
@@ -1895,35 +2081,25 @@
 
       <details class="weather-acc-item" data-lat="30.3935" data-lon="-86.4958" data-key="destin">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Destin, FL</span>
-              <span class="weather-line-desc">Clear with periodic clouds</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-destin">Wind 12 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-destin">7:08a – 7:20p</span></span>
-              <span class="weather-line-hilo">H85° / L70°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">76°</span>
+          <svg class="weather-line-icon" id="icon-destin" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Destin, FL <a class="wx-webcam" href="https://www.skylinewebcams.com/en/webcam/united-states/florida/destin/gulf-gate.html" target="_blank" rel="noopener" onclick="event.stopPropagation();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M15 10l6-3v10l-6-3"/></svg>Webcam</a></span>
+          <span class="weather-line-temp" id="temp-destin">—</span>
+          <span class="weather-line-hl" id="hilo-destin"></span>
+          <span class="weather-line-windline" id="windline-destin"></span>
+          <span class="weather-line-desc" id="desc-destin">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-destin"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-destin">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-destin">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-destin"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">85°</td><td class="num">70°</td><td class="num">5%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">85°</td><td class="num">73°</td><td class="num">0%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">85°</td><td class="num">75°</td><td class="num">15%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">84°</td><td class="num">78°</td><td class="num">25%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">83°</td><td class="num">80°</td><td class="num">75%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">84°</td><td class="num">80°</td><td class="num">75%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">85°</td><td class="num">79°</td><td class="num">55%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">81°</td><td class="num">72°</td><td class="num">75%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-destin"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=30.3935&lon=-86.4958" target="_blank" rel="noopener">
@@ -1935,35 +2111,25 @@
 
       <details class="weather-acc-item" data-lat="38.9822" data-lon="-94.6708" data-key="overlandpark">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Overland Park, KS</span>
-              <span class="weather-line-desc">Mostly cloudy</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-overlandpark">Wind 10 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-overlandpark">7:08a – 7:11p</span></span>
-              <span class="weather-line-hilo">H79° / L60°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">66°</span>
+          <svg class="weather-line-icon" id="icon-overlandpark" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Overland Park, KS</span>
+          <span class="weather-line-temp" id="temp-overlandpark">—</span>
+          <span class="weather-line-hl" id="hilo-overlandpark"></span>
+          <span class="weather-line-windline" id="windline-overlandpark"></span>
+          <span class="weather-line-desc" id="desc-overlandpark">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-overlandpark"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-overlandpark">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-overlandpark">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-overlandpark"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">79°</td><td class="num">60°</td><td class="num">10%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">78°</td><td class="num">63°</td><td class="num">40%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">81°</td><td class="num">71°</td><td class="num">30%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">72°</td><td class="num">62°</td><td class="num">75%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">68°</td><td class="num">61°</td><td class="num">15%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">68°</td><td class="num">59°</td><td class="num">0%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">69°</td><td class="num">46°</td><td class="num">0%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">66°</td><td class="num">44°</td><td class="num">0%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-overlandpark"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=38.9822&lon=-94.6708" target="_blank" rel="noopener">
@@ -1975,35 +2141,25 @@
 
       <details class="weather-acc-item" data-lat="46.0522" data-lon="-89.5498" data-key="sayner">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 19h11z"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Sayner, WI</span>
-              <span class="weather-line-desc">Mostly cloudy</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-sayner">Wind 6 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-sayner">7:05a – 6:52p</span></span>
-              <span class="weather-line-hilo">H77° / L51°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">52°</span>
+          <svg class="weather-line-icon" id="icon-sayner" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Sayner, WI <a class="wx-webcam" href="https://st-germain.com/360-webcam/" target="_blank" rel="noopener" onclick="event.stopPropagation();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M15 10l6-3v10l-6-3"/></svg>Webcam</a></span>
+          <span class="weather-line-temp" id="temp-sayner">—</span>
+          <span class="weather-line-hl" id="hilo-sayner"></span>
+          <span class="weather-line-windline" id="windline-sayner"></span>
+          <span class="weather-line-desc" id="desc-sayner">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-sayner"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-sayner">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-sayner">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-sayner"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">77°</td><td class="num">51°</td><td class="num">10%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">66°</td><td class="num">53°</td><td class="num">45%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">71°</td><td class="num">57°</td><td class="num">15%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">62°</td><td class="num">40°</td><td class="num">10%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">61°</td><td class="num">40°</td><td class="num">0%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">60°</td><td class="num">42°</td><td class="num">20%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">52°</td><td class="num">34°</td><td class="num">10%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">52°</td><td class="num">34°</td><td class="num">5%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-sayner"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=46.0522&lon=-89.5498" target="_blank" rel="noopener">
@@ -2015,35 +2171,25 @@
 
       <details class="weather-acc-item" data-lat="21.5167" data-lon="-71.5333" data-key="southcaicos">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">South Caicos, TCI</span>
-              <span class="weather-line-desc">Partly cloudy</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-southcaicos">Wind 15 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-southcaicos">6:48a – 6:52p</span></span>
-              <span class="weather-line-hilo">H88° / L85°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">86°</span>
+          <svg class="weather-line-icon" id="icon-southcaicos" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">South Caicos, TCI</span>
+          <span class="weather-line-temp" id="temp-southcaicos">—</span>
+          <span class="weather-line-hl" id="hilo-southcaicos"></span>
+          <span class="weather-line-windline" id="windline-southcaicos"></span>
+          <span class="weather-line-desc" id="desc-southcaicos">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-southcaicos"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-southcaicos">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-southcaicos">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-southcaicos"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">88°</td><td class="num">85°</td><td class="num">10%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">87°</td><td class="num">85°</td><td class="num">20%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">87°</td><td class="num">85°</td><td class="num">30%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">87°</td><td class="num">85°</td><td class="num">15%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">87°</td><td class="num">83°</td><td class="num">15%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">84°</td><td class="num">83°</td><td class="num">75%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">85°</td><td class="num">83°</td><td class="num">40%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">86°</td><td class="num">84°</td><td class="num">15%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-southcaicos"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=21.5167&lon=-71.5333" target="_blank" rel="noopener">
@@ -2055,35 +2201,25 @@
 
       <details class="weather-acc-item" data-lat="38.2278" data-lon="-92.9704" data-key="sunrisebeach">
         <summary class="weather-line">
-          <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
-          <div class="weather-line-main">
-            <div class="weather-line-top">
-              <span class="weather-line-city">Sunrise Beach, MO</span>
-              <span class="weather-line-desc">Partly cloudy</span>
-            </div>
-            <div class="weather-line-meta">
-              <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-sunrisebeach">Wind 7 mph</span></span>
-              <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-sunrisebeach">7:03a – 7:05p</span></span>
-              <span class="weather-line-hilo">H80° / L59°</span>
-            </div>
-          </div>
-          <span class="weather-line-temp">67°</span>
+          <svg class="weather-line-icon" id="icon-sunrisebeach" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h1"/></svg>
+          <span class="weather-line-city">Sunrise Beach, MO</span>
+          <span class="weather-line-temp" id="temp-sunrisebeach">—</span>
+          <span class="weather-line-hl" id="hilo-sunrisebeach"></span>
+          <span class="weather-line-windline" id="windline-sunrisebeach"></span>
+          <span class="weather-line-desc" id="desc-sunrisebeach">Loading…</span>
           <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="wx-strip" id="strip-sunrisebeach"></span>
         </summary>
         <div class="weather-forecast">
+          <div class="weather-line-meta">
+            <span class="weather-line-wind"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.6 7.6A2.5 2.5 0 1 1 19 12H2"/></svg><span id="wind-sunrisebeach">—</span></span>
+            <span class="weather-line-sun"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M4.9 4.9l1.4 1.4M2 12h2M19.1 4.9l-1.4 1.4M22 12h-2M6 20h12M12 16a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg><span id="sun-sunrisebeach">—</span></span>
+            <span class="weather-line-hilo" id="hilo2-sunrisebeach"></span>
+          </div>
           <div class="weather-forecast-wrap">
             <table class="weather-forecast-table">
-              <thead><tr><th>Day</th><th>Date</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
-              <tbody>
-                <tr><td>Mon</td><td>Sep 28</td><td class="num">80°</td><td class="num">59°</td><td class="num">15%</td></tr>
-                <tr><td>Tue</td><td>Sep 29</td><td class="num">84°</td><td class="num">59°</td><td class="num">10%</td></tr>
-                <tr><td>Wed</td><td>Sep 30</td><td class="num">87°</td><td class="num">70°</td><td class="num">10%</td></tr>
-                <tr><td>Thu</td><td>Oct 1</td><td class="num">78°</td><td class="num">68°</td><td class="num">55%</td></tr>
-                <tr><td>Fri</td><td>Oct 2</td><td class="num">71°</td><td class="num">64°</td><td class="num">75%</td></tr>
-                <tr><td>Sat</td><td>Oct 3</td><td class="num">69°</td><td class="num">63°</td><td class="num">75%</td></tr>
-                <tr><td>Sun</td><td>Oct 4</td><td class="num">69°</td><td class="num">49°</td><td class="num">0%</td></tr>
-                <tr><td>Mon</td><td>Oct 5</td><td class="num">67°</td><td class="num">43°</td><td class="num">0%</td></tr>
-              </tbody>
+              <thead><tr><th>Day</th><th>Date</th><th>Sky</th><th class="num">High</th><th class="num">Low</th><th class="num">Precip</th></tr></thead>
+              <tbody id="tbl-sunrisebeach"><tr><td colspan="6" class="wx-na">Loading forecast…</td></tr></tbody>
             </table>
           </div>
           <a class="weather-forecast-link" href="https://forecast.weather.gov/MapClick.php?lat=38.2278&lon=-92.9704" target="_blank" rel="noopener">
@@ -2095,17 +2231,14 @@
 
       <a class="weather-line" href="https://www.youtube.com/@MaxVelocityWX" target="_blank" rel="noopener">
         <svg class="weather-line-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 6.5s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.4 3 12 3 12 3h0s-4.4 0-7.3.2c-.4 0-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S1.3 8.4 1.3 10.3v1.9c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.2 7.6.2s4.4 0 7.3-.2c.4 0 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.9c0-1.9-.2-3.8-.2-3.8z"/><path d="M9.8 14.5l5.8-3.2-5.8-3.2v6.4z" fill="currentColor" stroke="none"/></svg>
-        <div class="weather-line-main">
-          <div class="weather-line-top">
-            <span class="weather-line-city">Max Velocity YouTube</span>
-            <span class="weather-line-desc">Severe weather coverage</span>
-          </div>
-        </div>
+        <span class="weather-line-city">Max Velocity YouTube</span>
+        <span></span>
+        <span class="weather-line-desc">Severe weather coverage</span>
         <svg class="weather-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
 
     </div>
-    <p class="market-note">Current conditions, wind speed and sunrise/sunset update live from Open-Meteo each time this page loads. 8-day highs/lows are from the last refresh.</p>
+    <p class="market-note">Temperature, high/low, wind, sunrise/sunset and the 8-day forecast come live from Open-Meteo each time the page loads and every 15 minutes. Tap a city for the full forecast.</p>
 
     <div class="moon-card">
       <div class="moon-current">
@@ -2151,80 +2284,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M21 7v6h-6"/></svg>
       </div>
       <div>
-        <p class="band-title">Markets</p>
+        <p class="band-title">My Stocks</p>
         <p class="band-sub" id="marketSub">Today's close</p>
       </div>
     </div>
 
-    <!-- Overall market -->
-    <div class="market-compact">
-      <a class="market-line compact" href="https://www.google.com/finance/quote/.DJI:INDEXDJX" target="_blank" rel="noopener" data-finnhub="DIA" data-key="dji">
-        <span class="market-line-symbol">DIA</span>
-        <div class="market-line-main">
-          <div class="market-line-top">
-            <span class="market-line-name">Dow Jones (DIA ETF)</span>
-            <span class="market-line-value" id="val-dji">44,910</span>
-            <span class="market-line-change up" id="chgwrap-dji">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-              <span id="chg-dji">+0.31%</span>
-            </span>
-          </div>
-          <div class="market-line-range">ETF proxy — click for live Dow on Google Finance →</div>
-        </div>
-        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a class="market-line compact" href="https://www.google.com/finance/quote/.IXIC:INDEXNASDAQ" target="_blank" rel="noopener" data-finnhub="QQQ" data-key="ndq">
-        <span class="market-line-symbol">QQQ</span>
-        <div class="market-line-main">
-          <div class="market-line-top">
-            <span class="market-line-name">Nasdaq (QQQ ETF)</span>
-            <span class="market-line-value" id="val-ndq">21,650</span>
-            <span class="market-line-change down" id="chgwrap-ndq">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-              <span id="chg-ndq">-0.18%</span>
-            </span>
-          </div>
-          <div class="market-line-range">ETF proxy — click for live Nasdaq on Google Finance →</div>
-        </div>
-        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a class="market-line compact" href="https://www.google.com/finance/quote/.INX:INDEXSP" target="_blank" rel="noopener" data-finnhub="SPY" data-key="spx">
-        <span class="market-line-symbol">SPY</span>
-        <div class="market-line-main">
-          <div class="market-line-top">
-            <span class="market-line-name">S&amp;P 500 (SPY ETF)</span>
-            <span class="market-line-value" id="val-spx">6,481.20</span>
-            <span class="market-line-change up" id="chgwrap-spx">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-              <span id="chg-spx">+0.62%</span>
-            </span>
-          </div>
-          <div class="market-line-range">ETF proxy — click for live S&amp;P 500 on Google Finance →</div>
-        </div>
-        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a class="market-line compact" href="https://www.google.com/finance/quote/RUT:INDEXRUSSELL" target="_blank" rel="noopener" data-finnhub="IWM" data-key="rut">
-        <span class="market-line-symbol">IWM</span>
-        <div class="market-line-main">
-          <div class="market-line-top">
-            <span class="market-line-name">Russell 2000 (IWM ETF)</span>
-            <span class="market-line-value" id="val-rut">2,312.5</span>
-            <span class="market-line-change up" id="chgwrap-rut">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-              <span id="chg-rut">+0.95%</span>
-            </span>
-          </div>
-          <div class="market-line-range">ETF proxy — click for live Russell 2000 on Google Finance →</div>
-        </div>
-        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-    </div>
-
     <!-- Individual stock watchlist -->
-    <p class="market-compact-label" style="margin-top:26px;">My Stocks</p>
     <div class="market-compact">
       <a class="market-line compact" href="https://www.google.com/finance/quote/AAPL:NASDAQ" target="_blank" rel="noopener" data-finnhub="AAPL" data-key="aapl">
         <span class="market-line-symbol">AAPL</span>
@@ -2305,8 +2370,23 @@
         </div>
         <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
+
+      <a class="market-line compact" href="https://www.google.com/finance/quote/SPCX:NASDAQ" target="_blank" rel="noopener" data-finnhub="SPCX" data-key="spcx">
+        <span class="market-line-symbol">SPCX</span>
+        <div class="market-line-main">
+          <div class="market-line-top">
+            <span class="market-line-name">SpaceX</span>
+            <span class="market-line-value" id="val-spcx">—</span>
+            <span class="market-line-change up" id="chgwrap-spcx" style="display:none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              <span id="chg-spcx">0.00%</span>
+            </span>
+          </div>
+        </div>
+        <svg class="market-line-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
     </div>
-    <p class="market-note">Finnhub's free tier doesn't include the major indices, so those four rows track a closely related ETF instead (live price &amp; change) — click any row to see the actual live index on Google Finance. Apple, Microsoft, Nvidia, Tesla and W.R. Berkley are the real thing. 30-day ranges are still static examples.</p>
+    <p class="market-note">Live prices from Finnhub; click any row to open the full quote on Google Finance. If a price can't be loaded it shows "Not Available".</p>
   </div>
 </section>
 
@@ -2327,177 +2407,21 @@
       </div>
     </div>
 
-    <details class="chiefs-details">
+    <details class="chiefs-details" open>
       <summary class="chiefs-summary">
         <span class="chiefs-summary-badge">KC</span>
         <div class="chiefs-summary-main">
-          <span class="chiefs-summary-label">Next Game — Week 4</span>
-          <span class="chiefs-summary-opp">at Las Vegas Raiders</span>
-          <span class="chiefs-summary-meta">Sun, Oct 4 · 3:25 PM CT · CBS</span>
+          <span class="chiefs-summary-label">Next Game — Week 6</span>
+          <span class="chiefs-summary-opp">vs LA Chargers</span>
+          <span class="chiefs-summary-meta">Sun, Oct 18 · 3:25 PM CT · CBS</span>
         </div>
-        <span class="chiefs-summary-record">3–0</span>
+        <span class="chiefs-summary-record">4–0</span>
         <svg class="chiefs-summary-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </summary>
 
       <div class="chiefs-full">
-        <div class="chiefs-card">
-          <div class="chiefs-table-wrap">
-            <table class="chiefs-table">
-              <thead>
-                <tr>
-                  <th>Wk</th>
-                  <th>Date</th>
-                  <th>Opponent</th>
-                  <th>Time (CT)</th>
-                  <th>TV</th>
-                  <th>Result</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mon, Sep 14</td>
-                  <td class="opp"><span class="loc">vs</span>Denver Broncos</td>
-                  <td>7:15 PM</td>
-                  <td>ESPN / ABC</td>
-                  <td><span class="chiefs-w">W</span>31–10</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Sun, Sep 20</td>
-                  <td class="opp"><span class="loc">vs</span>Indianapolis Colts</td>
-                  <td>7:20 PM</td>
-                  <td>NBC</td>
-                  <td><span class="chiefs-w">W</span>33–30</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Sun, Sep 27</td>
-                  <td class="opp"><span class="loc">at</span>Miami Dolphins</td>
-                  <td>12:00 PM</td>
-                  <td>CBS</td>
-                  <td><span class="chiefs-w">W</span>24–10</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Sun, Oct 4</td>
-                  <td class="opp"><span class="loc">at</span>Las Vegas Raiders</td>
-                  <td>3:25 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr class="chiefs-bye">
-                  <td colspan="6">Week 5 — Bye</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Sun, Oct 18</td>
-                  <td class="opp"><span class="loc">vs</span>LA Chargers</td>
-                  <td>3:25 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Sun, Oct 25</td>
-                  <td class="opp"><span class="loc">at</span>Seattle Seahawks</td>
-                  <td>7:20 PM</td>
-                  <td>NBC</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Sun, Nov 1</td>
-                  <td class="opp"><span class="loc">at</span>Denver Broncos</td>
-                  <td>3:25 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Sun, Nov 8</td>
-                  <td class="opp"><span class="loc">vs</span>New York Jets</td>
-                  <td>12:00 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Sun, Nov 15</td>
-                  <td class="opp"><span class="loc">at</span>Atlanta Falcons</td>
-                  <td>12:00 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>Sun, Nov 22</td>
-                  <td class="opp"><span class="loc">vs</span>Arizona Cardinals</td>
-                  <td>12:00 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>Thu, Nov 26</td>
-                  <td class="opp"><span class="loc">at</span>Buffalo Bills</td>
-                  <td>7:20 PM</td>
-                  <td>NBC</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>13</td>
-                  <td>Thu, Dec 3</td>
-                  <td class="opp"><span class="loc">at</span>LA Rams</td>
-                  <td>7:15 PM</td>
-                  <td>Prime Video</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>14</td>
-                  <td>Sun, Dec 13</td>
-                  <td class="opp"><span class="loc">at</span>Cincinnati Bengals</td>
-                  <td>3:25 PM</td>
-                  <td>CBS</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>15</td>
-                  <td>Mon, Dec 21</td>
-                  <td class="opp"><span class="loc">vs</span>New England Patriots</td>
-                  <td>7:15 PM</td>
-                  <td>ESPN / ABC</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>16</td>
-                  <td>Sun, Dec 27</td>
-                  <td class="opp"><span class="loc">vs</span>San Francisco 49ers</td>
-                  <td>3:25 PM</td>
-                  <td>FOX</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>17</td>
-                  <td>Sun, Jan 3</td>
-                  <td class="opp"><span class="loc">at</span>LA Chargers</td>
-                  <td>12:00 PM</td>
-                  <td>TBD</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-                <tr>
-                  <td>18</td>
-                  <td>Sun, Jan 10</td>
-                  <td class="opp"><span class="loc">vs</span>Las Vegas Raiders</td>
-                  <td>12:00 PM</td>
-                  <td>TBD</td>
-                  <td class="chiefs-pending">—</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p class="chiefs-note">Week 17/18 kickoff times and TV are set later in the year. Times shown in Central.</p>
+        <div id="chiefsSchedule" class="cs-wrap"></div>
+        <p class="chiefs-note">Week 17/18 kickoff times and TV are set later in the year. Times shown in Central. Scores and standings are a snapshot as of Oct 24 — the next-game banner and the Results / Upcoming split follow the calendar automatically.</p>
 
         <p class="standings-heading">AFC West Standings</p>
         <div class="chiefs-card">
@@ -2516,29 +2440,29 @@
                 <tr class="standings-kc">
                   <td>1</td>
                   <td>Kansas City Chiefs</td>
-                  <td class="num">3</td>
+                  <td class="num">5</td>
                   <td class="num">0</td>
                   <td class="num">1.000</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>Las Vegas Raiders</td>
-                  <td class="num">3</td>
-                  <td class="num">0</td>
-                  <td class="num">1.000</td>
+                  <td>Denver Broncos</td>
+                  <td class="num">4</td>
+                  <td class="num">2</td>
+                  <td class="num">.667</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>Denver Broncos</td>
-                  <td class="num">2</td>
-                  <td class="num">1</td>
-                  <td class="num">.667</td>
+                  <td>Las Vegas Raiders</td>
+                  <td class="num">3</td>
+                  <td class="num">3</td>
+                  <td class="num">.500</td>
                 </tr>
                 <tr>
                   <td>4</td>
                   <td>LA Chargers</td>
                   <td class="num">0</td>
-                  <td class="num">3</td>
+                  <td class="num">6</td>
                   <td class="num">.000</td>
                 </tr>
               </tbody>
@@ -2567,13 +2491,13 @@
       </div>
     </div>
 
-    <details class="bananas-details">
+    <details class="bananas-details" open>
       <summary class="bananas-summary">
         <span class="bananas-summary-badge">SAV</span>
         <div class="bananas-summary-main">
-          <span class="bananas-summary-label">Latest Result</span>
-          <span class="bananas-summary-opp">W 4–2 at Texas Tailgaters</span>
-          <span class="bananas-summary-meta">Sun, Sep 27 · Globe Life Field, Arlington, TX</span>
+          <span class="bananas-summary-label">Season Complete</span>
+          <span class="bananas-summary-opp">L 1–2 vs Texas Tailgaters · Banana Bowl</span>
+          <span class="bananas-summary-meta">Sat, Oct 10 · Nationals Park, Washington, D.C.</span>
         </div>
         <span class="bananas-summary-record">36–25</span>
         <svg class="bananas-summary-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -2587,6 +2511,10 @@
                 <tr><th>Date</th><th>Matchup</th><th>Venue</th><th>Result</th></tr>
               </thead>
               <tbody>
+                <tr><td>Oct 10</td><td>vs Texas Tailgaters · Banana Bowl</td><td>Nationals Park, Washington D.C.</td><td><span class="bananas-l">L</span>1–2</td></tr>
+                <tr><td>Oct 3</td><td>vs Party Animals · Showdown</td><td>Postseason</td><td><span class="bananas-w">W</span>1–0</td></tr>
+                <tr><td>Oct 3</td><td>vs Party Animals</td><td>Postseason</td><td><span class="bananas-w">W</span>4–3</td></tr>
+                <tr><td>Oct 1</td><td>vs Party Animals</td><td>Postseason</td><td><span class="bananas-l">L</span>3–7</td></tr>
                 <tr><td>Sep 27</td><td>at Texas Tailgaters</td><td>Globe Life Field, Arlington TX</td><td><span class="bananas-w">W</span>4–2</td></tr>
                 <tr><td>Sep 26</td><td>vs Texas Tailgaters</td><td>Globe Life Field, Arlington TX</td><td><span class="bananas-l">L</span>0–3</td></tr>
                 <tr><td>Sep 25</td><td>vs Texas Tailgaters</td><td>Globe Life Field, Arlington TX</td><td><span class="bananas-l">L</span>1–2</td></tr>
@@ -2600,7 +2528,7 @@
             </table>
           </div>
         </div>
-        <p class="bananas-note">36–25 through 61 games this season. The Banana Bowl championship is set for Saturday, October 10, 2026 at Nationals Park in Washington, D.C. — playoff matchups not yet announced.</p>
+        <p class="bananas-note">The 2026 season is complete: 36–25 in the regular season. The Texas Tailgaters won the Banana Bowl, 2–1, on October 10 at Nationals Park. The next Banana Ball season is not yet scheduled.</p>
       </div>
     </details>
   </div>
@@ -2623,13 +2551,13 @@
       </div>
     </div>
 
-    <details class="angels-details">
+    <details class="angels-details" open>
       <summary class="angels-summary">
         <span class="angels-summary-badge">USN</span>
         <div class="angels-summary-main">
-          <span class="angels-summary-label">Next Show</span>
-          <span class="angels-summary-opp">Grand Junction Air Show</span>
-          <span class="angels-summary-meta">Oct 3–4 · Grand Junction, CO</span>
+          <span class="angels-summary-label">This Weekend</span>
+          <span class="angels-summary-opp">NAS Jacksonville Air Show</span>
+          <span class="angels-summary-meta">Oct 17–18 · NAS Jacksonville, FL</span>
         </div>
         <svg class="angels-summary-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </summary>
@@ -2645,9 +2573,9 @@
                 <tr><td>Nov 6–7</td><td>NAS Pensacola, FL</td><td>Blue Angels Homecoming Air Show</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
                 <tr><td>Oct 31–Nov 1</td><td>Peachtree City, GA</td><td>Air Dot Show Atlanta</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
                 <tr><td>Oct 24–25</td><td>El Paso, TX</td><td>Amigo Airsho</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
-                <tr><td>Oct 17–18</td><td>NAS Jacksonville, FL</td><td>NAS Jacksonville Air Show</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
-                <tr><td>Oct 10–11</td><td>San Francisco, CA</td><td>San Francisco Fleet Week</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
-                <tr><td>Oct 3–4</td><td>Grand Junction, CO</td><td>Grand Junction Air Show</td><td><span class="angels-status upcoming">Upcoming</span></td></tr>
+                <tr class="angels-now"><td>Oct 17–18</td><td>NAS Jacksonville, FL</td><td>NAS Jacksonville Air Show</td><td><span class="angels-status now">This Weekend</span></td></tr>
+                <tr class="angels-past"><td>Oct 10–11</td><td>San Francisco, CA</td><td>San Francisco Fleet Week</td><td><span class="angels-status flown">Flown</span></td></tr>
+                <tr class="angels-past"><td>Oct 3–4</td><td>Grand Junction, CO</td><td>Grand Junction Air Show</td><td><span class="angels-status flown">Flown</span></td></tr>
                 <tr class="angels-past"><td>Sep 25–27</td><td>San Diego, CA</td><td>MCAS Miramar Air Show</td><td><span class="angels-status flown">Flown</span></td></tr>
                 <tr class="angels-past"><td>Sep 19–20</td><td>Virginia Beach, VA</td><td>NAS Oceana Air Show</td><td><span class="angels-status flown">Flown</span></td></tr>
                 <tr class="angels-past"><td>Sep 5–7</td><td>Cleveland, OH</td><td>Cleveland National Air Show</td><td><span class="angels-status flown">Flown</span></td></tr>
@@ -2685,7 +2613,7 @@
 </section>
 
 <!-- PGA Tour band -->
-<section class="band tint" style="padding-top:28px; padding-bottom:28px;">
+<section class="band tint" style="padding-top:28px; padding-bottom:28px; background:var(--pga-wash);">
   <div class="band-inner">
     <div class="band-head">
       <div class="band-icon">
@@ -2701,19 +2629,19 @@
       </div>
     </div>
 
-    <details class="pga-details">
+    <details class="pga-details" open>
       <summary class="pga-summary">
         <span class="pga-summary-badge">PGA</span>
         <div class="pga-summary-main">
           <span class="pga-summary-label">Next Event</span>
-          <span class="pga-summary-opp">Bank of Utah Championship</span>
-          <span class="pga-summary-meta">Oct 1–4 · St. George, UT</span>
+          <span class="pga-summary-opp">Butterfield Bermuda Championship</span>
+          <span class="pga-summary-meta">Oct 22–25 · Southampton, Bermuda</span>
         </div>
         <svg class="pga-summary-chevron" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </summary>
 
       <div class="pga-full">
-        <p class="pga-subheading">Leaderboard — Biltmore Championship Asheville (Final)</p>
+        <p class="pga-subheading">Leaderboard — Baycurrent Classic (Final)</p>
         <div class="pga-card">
           <div class="pga-table-wrap">
             <table class="pga-table">
@@ -2721,30 +2649,30 @@
                 <tr><th>Pos</th><th>Player</th><th>To Par</th><th>Total</th></tr>
               </thead>
               <tbody>
-                <tr><td>1</td><td><span class="pga-win">W</span>Jacob Bridgeman</td><td>-26</td><td>258</td></tr>
-                <tr><td>2</td><td>Ben James</td><td>-24</td><td>260</td></tr>
-                <tr><td>T3</td><td>Ricky Castillo</td><td>-23</td><td>261</td></tr>
-                <tr><td>T3</td><td>Neal Shipley</td><td>-23</td><td>261</td></tr>
-                <tr><td>T5</td><td>J.T. Poston</td><td>-22</td><td>262</td></tr>
-                <tr><td>T5</td><td>Jackson Koivun</td><td>-22</td><td>262</td></tr>
+                <tr><td>1</td><td><span class="pga-win">W</span>Michael Brennan</td><td>-16</td><td>—</td></tr>
+                <tr><td>T2</td><td>Mitchell</td><td>-15</td><td>—</td></tr>
+                <tr><td>T2</td><td>Bridgeman</td><td>-15</td><td>—</td></tr>
+                <tr><td>T4</td><td>Harman</td><td>—</td><td>—</td></tr>
+                <tr><td>T4</td><td>Schauffele</td><td>—</td><td>—</td></tr>
+                <tr><td>T4</td><td>J. Smith</td><td>—</td><td>—</td></tr>
               </tbody>
             </table>
           </div>
         </div>
-        <p class="pga-note">Bridgeman won by two over James at The Cliffs at Walnut Cove, Sept 17–20. This was the last stroke-play event — the following week's Presidents Cup (Sept 24–27, Medinah) is match play, and Team USA won 17–13 over the International Team.</p>
+        <p class="pga-note">Michael Brennan won the Baycurrent Classic in Yokohama, Japan (Oct 8–11) at -16. Austin Smotherman won the Bank of Utah Championship the week before at -26. Leaderboard is a snapshot — check pgatour.com for full results.</p>
 
         <p class="pga-subheading second">Schedule — 2026 FedExCup Fall</p>
         <div class="pga-card">
           <div class="pga-table-wrap">
-            <table class="pga-table">
+            <table class="pga-table pga-schedule">
               <thead>
                 <tr><th>Date</th><th>Event</th><th>Location</th><th>Status</th></tr>
               </thead>
               <tbody>
                 <tr class="pga-past"><td>Sep 17–20</td><td>Biltmore Championship Asheville</td><td>Asheville, NC</td><td><span class="pga-status flown">Flown</span></td></tr>
                 <tr class="pga-past"><td>Sep 24–27</td><td>Presidents Cup</td><td>Medinah, IL</td><td><span class="pga-status flown">Flown</span></td></tr>
-                <tr><td>Oct 1–4</td><td>Bank of Utah Championship</td><td>St. George, UT</td><td><span class="pga-status upcoming">Upcoming</span></td></tr>
-                <tr><td>Oct 8–11</td><td>Baycurrent Classic</td><td>Japan</td><td><span class="pga-status upcoming">Upcoming</span></td></tr>
+                <tr class="pga-past"><td>Oct 1–4</td><td>Bank of Utah Championship</td><td>Ivins, UT</td><td><span class="pga-status flown">Flown</span></td></tr>
+                <tr class="pga-past"><td>Oct 8–11</td><td>Baycurrent Classic</td><td>Yokohama, Japan</td><td><span class="pga-status flown">Flown</span></td></tr>
                 <tr><td>Oct 22–25</td><td>Butterfield Bermuda Championship</td><td>Southampton, Bermuda</td><td><span class="pga-status upcoming">Upcoming</span></td></tr>
                 <tr><td>Oct 29–Nov 1</td><td>VidantaWorld Mexico Open</td><td>Vallarta, Mexico</td><td><span class="pga-status upcoming">Upcoming</span></td></tr>
                 <tr><td>Nov 12–15</td><td>Good Good Championship</td><td>Austin, TX</td><td><span class="pga-status upcoming">Upcoming</span></td></tr>
@@ -2771,6 +2699,30 @@
 <script>
   function pad(n){ return n.toString().padStart(2,'0'); }
 
+  // ===== Three-month calendar (Central time) =====
+  var calShown='';
+  function renderCalendar(){
+    var el=document.getElementById('calRow'); if(!el) return;
+    var parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()).split('-');
+    var y=+parts[0], m=+parts[1]-1, d=+parts[2];
+    var key=y+'-'+m+'-'+d; if(key===calShown) return; calShown=key;
+    var html='';
+    for(var k=0;k<3;k++){
+      var first=new Date(Date.UTC(y,m+k,1)), fy=first.getUTCFullYear(), fm=first.getUTCMonth();
+      var start=first.getUTCDay(), days=new Date(Date.UTC(fy,fm+1,0)).getUTCDate();
+      var title=first.toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
+      var h='<div class="mini-cal"><p class="mini-cal-title">'+title+'</p><div class="mini-cal-grid">';
+      ['S','M','T','W','T','F','S'].forEach(function(x){ h+='<span class="mini-cal-dow">'+x+'</span>'; });
+      for(var i=0;i<start;i++) h+='<span></span>';
+      for(var n=1;n<=days;n++){
+        var isToday=(k===0&&n===d), dow=(start+n-1)%7;
+        h+='<span class="mini-cal-day'+(isToday?' today':((dow===0||dow===6)?' wkend':''))+'"'+(isToday?' aria-current="date"':'')+'>'+n+'</span>';
+      }
+      html+=h+'</div></div>';
+    }
+    el.innerHTML=html;
+  }
+
   function updateClock(){
     const now = new Date();
 
@@ -2781,6 +2733,7 @@
       hour12: true
     });
     document.getElementById('clockTime').textContent = timeStr + ' CT';
+    renderCalendar();
 
     const dateOpts = {
       timeZone: 'America/Chicago',
@@ -2795,7 +2748,7 @@
     const marketSub = document.getElementById('marketSub');
     if(marketSub){
       const dateStr = now.toLocaleDateString('en-US', { month:'short', day:'numeric' });
-      marketSub.textContent = dateStr + ' \u00b7 figures shown are placeholders';
+      marketSub.textContent = 'Prices as of ' + dateStr;
     }
 
     const lastUpdatedEl = document.getElementById('pageLastUpdated');
@@ -2805,6 +2758,121 @@
 
   }
 
+
+  // ===== Sports: date-driven status (re-evaluates from today's Central date) =====
+  var MONTHS={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  function ctToday(){
+    var p=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    return p; // YYYY-MM-DD
+  }
+  function iso(y,m,d){ return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
+  function parseRange(txt,defYear){
+    // "Oct 31–Nov 1", "Sep 25–27", "Mar 14", "Sun, Oct 18"
+    txt=txt.replace(/^[A-Za-z]{3},\s*/,'').replace(/\u2013|\u2014|-/g,'~');
+    var parts=txt.split('~'), m1=parts[0].trim().match(/^([A-Za-z]{3})\s+(\d+)/);
+    if(!m1) return null;
+    var mo=MONTHS[m1[1]], d1=+m1[2], mo2=mo, d2=d1;
+    if(parts[1]){
+      var m2=parts[1].trim().match(/^(?:([A-Za-z]{3})\s+)?(\d+)/);
+      if(m2){ if(m2[1]) mo2=MONTHS[m2[1]]; d2=+m2[2]; }
+    }
+    var y=defYear+(mo<6?1:0); var y2=defYear+(mo2<6?1:0);
+    return {start:iso(y,mo,d1), end:iso(y2,mo2,d2)};
+  }
+  function setSummary(prefix,label,opp,meta){
+    var a=document.querySelector('.'+prefix+'-summary-label'), b=document.querySelector('.'+prefix+'-summary-opp'), c=document.querySelector('.'+prefix+'-summary-meta');
+    if(a) a.textContent=label; if(b) b.textContent=opp; if(c) c.textContent=meta;
+  }
+  function refreshStatusTable(rootSel,rowPrefix,statusPrefix,cols,label){
+    var rows=document.querySelectorAll(rootSel+' tbody tr'), today=ctToday(), best=null;
+    rows.forEach(function(tr){
+      var td=tr.children[0]; if(!td) return;
+      var r=parseRange(td.textContent,2026); if(!r) return;
+      var st=tr.querySelector('.'+statusPrefix+'-status'); if(!st) return;
+      tr.classList.remove(rowPrefix+'-past',rowPrefix+'-now');
+      st.classList.remove('flown','upcoming','now');
+      if(r.end<today){ tr.classList.add(rowPrefix+'-past'); st.classList.add('flown'); st.textContent='Flown'; }
+      else if(r.start<=today){ tr.classList.add(rowPrefix+'-now'); st.classList.add('now'); st.textContent='In Progress'; }
+      else { st.classList.add('upcoming'); st.textContent='Upcoming'; }
+      if(r.end>=today && (!best || r.start<best.r.start)) best={tr:tr,r:r};
+    });
+    if(!best){ setSummary(rowPrefix,'Season Complete','No more events scheduled','See you next season'); return; }
+    var c=best.tr.children, started=best.r.start<=today;
+    setSummary(rowPrefix, started?label.now:label.next, c[cols.title].textContent, c[0].textContent+' · '+c[cols.place].textContent);
+  }
+  // Chiefs schedule data — add a result string (e.g. 'W 24-10') after each game.
+  var CHIEFS=[
+    {wk:1,d:'2026-09-14',loc:'vs',opp:'Denver Broncos',t:'7:15 PM',tv:'ESPN / ABC',res:'W 31–10'},
+    {wk:2,d:'2026-09-20',loc:'vs',opp:'Indianapolis Colts',t:'7:20 PM',tv:'NBC',res:'W 33–30'},
+    {wk:3,d:'2026-09-27',loc:'at',opp:'Miami Dolphins',t:'12:00 PM',tv:'CBS',res:'W 24–10'},
+    {wk:4,d:'2026-10-04',loc:'at',opp:'Las Vegas Raiders',t:'3:25 PM',tv:'CBS',res:'W 30–27'},
+    {wk:5,d:'2026-10-11',bye:true},
+    {wk:6,d:'2026-10-18',loc:'vs',opp:'LA Chargers',t:'3:25 PM',tv:'CBS',res:'W 22–6'},
+    {wk:7,d:'2026-10-25',loc:'at',opp:'Seattle Seahawks',t:'7:20 PM',tv:'NBC'},
+    {wk:8,d:'2026-11-01',loc:'at',opp:'Denver Broncos',t:'3:25 PM',tv:'CBS'},
+    {wk:9,d:'2026-11-08',loc:'vs',opp:'New York Jets',t:'12:00 PM',tv:'CBS'},
+    {wk:10,d:'2026-11-15',loc:'at',opp:'Atlanta Falcons',t:'12:00 PM',tv:'CBS'},
+    {wk:11,d:'2026-11-22',loc:'vs',opp:'Arizona Cardinals',t:'12:00 PM',tv:'CBS'},
+    {wk:12,d:'2026-11-26',loc:'at',opp:'Buffalo Bills',t:'7:20 PM',tv:'NBC'},
+    {wk:13,d:'2026-12-03',loc:'at',opp:'LA Rams',t:'7:15 PM',tv:'Prime Video'},
+    {wk:14,d:'2026-12-13',loc:'at',opp:'Cincinnati Bengals',t:'3:25 PM',tv:'CBS'},
+    {wk:15,d:'2026-12-21',loc:'vs',opp:'New England Patriots',t:'7:15 PM',tv:'ESPN / ABC'},
+    {wk:16,d:'2026-12-27',loc:'vs',opp:'San Francisco 49ers',t:'3:25 PM',tv:'FOX'},
+    {wk:17,d:'2027-01-03',loc:'at',opp:'LA Chargers',t:'12:00 PM',tv:'TBD'},
+    {wk:18,d:'2027-01-10',loc:'vs',opp:'Las Vegas Raiders',t:'12:00 PM',tv:'TBD'}
+  ];
+  function csFmt(iso){
+    return new Date(iso+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'});
+  }
+  function refreshChiefs(){
+    var box=document.getElementById('chiefsSchedule'); if(!box) return;
+    var today=ctToday(), w=0, l=0, t=0, next=null, last=null;
+    CHIEFS.forEach(function(g){
+      if(g.bye) return;
+      if(g.res){ var c=g.res.charAt(0); if(c==='W') w++; else if(c==='L') l++; else t++; last=g; }
+      else if(!next && g.d>=today) next=g;
+    });
+    var results='', upcoming='';
+    CHIEFS.forEach(function(g){
+      if(g.bye){
+        var byeHtml='<div class="cs-row bye"><span class="cs-wk">'+g.wk+'</span><span>Bye week · '+csFmt(g.d)+'</span></div>';
+        if(g.d<today) results+=byeHtml; else upcoming+=byeHtml;
+        return;
+      }
+      var opp='<span class="cs-opp"><span class="loc">'+g.loc+'</span>'+g.opp+'<span class="cs-sub">'+csFmt(g.d)+'</span></span>';
+      if(g.res){
+        var c=g.res.charAt(0), sc=g.res.slice(2), cls=c==='W'?'chiefs-w':'chiefs-l';
+        results+='<div class="cs-row"><span class="cs-wk">'+g.wk+'</span>'+opp+'<span class="cs-score"><span class="'+cls+'">'+c+'</span>'+sc+'</span></div>';
+      } else if(g.d<today){
+        results+='<div class="cs-row pending"><span class="cs-wk">'+g.wk+'</span>'+opp+'<span class="cs-score">Score pending</span></div>';
+      } else {
+        var isNext=(g===next);
+        upcoming+='<div class="cs-row'+(isNext?' next':'')+'"><span class="cs-wk">'+g.wk+'</span><span class="cs-opp"><span class="loc">'+g.loc+'</span>'+g.opp+'<span class="cs-sub">'+csFmt(g.d)+'</span></span><span class="cs-when"><b>'+g.t+' CT</b>'+g.tv+'</span></div>';
+      }
+    });
+    var rec=w+'–'+l+(t?'–'+t:'');
+    var lastTxt=last?(last.res.charAt(0)+' '+last.res.slice(2)+' <small>'+last.loc+' '+last.opp+'</small>'):'—';
+    var nextTxt=next?(csFmt(next.d).replace(/^\w+, /,'')+' <small>'+next.loc+' '+next.opp+'</small>'):'—';
+    box.innerHTML=
+      '<div class="cs-stats">'+
+        '<div class="cs-stat"><p class="cs-stat-label">Record</p><p class="cs-stat-value">'+rec+'</p></div>'+
+        '<div class="cs-stat"><p class="cs-stat-label">Last game</p><p class="cs-stat-value">'+lastTxt+'</p></div>'+
+        '<div class="cs-stat"><p class="cs-stat-label">Next game</p><p class="cs-stat-value">'+nextTxt+'</p></div>'+
+      '</div>'+
+      '<div class="cs-cols">'+
+        '<div class="cs-col"><p class="cs-col-title">Results<span>'+rec+'</span></p>'+(results||'<div class="cs-empty">No games played yet.</div>')+'</div>'+
+        '<div class="cs-col"><p class="cs-col-title">Upcoming<span>'+(CHIEFS.filter(function(g){return !g.bye&&!g.res&&g.d>=today;}).length)+' games left</span></p>'+(upcoming||'<div class="cs-empty">Regular season complete.</div>')+'</div>'+
+      '</div>';
+    var rE=document.querySelector('.chiefs-summary-record'); if(rE) rE.textContent=rec;
+    if(!next){ setSummary('chiefs','Regular Season','Complete','Final record '+rec); return; }
+    setSummary('chiefs','Next Game — Week '+next.wk, next.loc+' '+next.opp, csFmt(next.d)+' · '+next.t+' CT · '+next.tv);
+  }
+  function refreshSports(){
+    try{ refreshChiefs(); }catch(e){}
+    try{ refreshStatusTable('.angels-table','angels','angels',{title:2,place:1},{next:'Next Show',now:'This Weekend'}); }catch(e){}
+    try{ refreshStatusTable('.pga-schedule','pga','pga',{title:1,place:2},{next:'Next Event',now:'In Progress'}); }catch(e){}
+  }
+  refreshSports(); setInterval(refreshSports,600000);
   updateClock();
   setInterval(updateClock, 30000);
 
@@ -2821,66 +2889,83 @@
     return hh12 + ':' + mm + ampm;
   }
 
+  // ===== Live weather: current, high/low, next days (Open-Meteo) =====
+  var WX_ICONS={
+    clear:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    cloud:'<path d="M20 16.5a4 4 0 0 0-2-7.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 16h13.5z"/>',
+    rain:'<path d="M20 14.5a4 4 0 0 0-2-6.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 15h1"/><path d="M8 18v2M12 17v3M16 18v2"/>',
+    snow:'<path d="M20 14.5a4 4 0 0 0-2-6.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 15h1"/><path d="M8 18h.01M12 20h.01M16 18h.01"/>',
+    storm:'<path d="M20 14.5a4 4 0 0 0-2-6.5 6 6 0 0 0-11.3-1.7A4.5 4.5 0 0 0 6.5 15h1"/><path d="M12 15l-2 4h4l-2 4"/>',
+    fog:'<path d="M4 9h16M3 13h18M6 17h12"/>'
+  };
+  function wxInfo(c){
+    if(c===0) return ['Clear','clear'];
+    if(c===1) return ['Mostly clear','clear'];
+    if(c===2) return ['Partly cloudy','cloud'];
+    if(c===3) return ['Overcast','cloud'];
+    if(c===45||c===48) return ['Fog','fog'];
+    if(c>=51&&c<=57) return ['Drizzle','rain'];
+    if(c>=61&&c<=67) return ['Rain','rain'];
+    if(c>=71&&c<=77||c===85||c===86) return ['Snow','snow'];
+    if(c>=80&&c<=82) return ['Showers','rain'];
+    if(c>=95) return ['Thunderstorms','storm'];
+    return ['—','cloud'];
+  }
+  function wxDay(t,i){
+    if(i===0) return 'Today';
+    return new Date(t+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'});
+  }
+  function wxDate(t){
+    return new Date(t+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
+  }
+  function wxRound(v){ return (typeof v==='number') ? Math.round(v)+'°' : '—'; }
+  function wxFail(key){
+    var set=function(id,txt){ var e=document.getElementById(id); if(e){ e.textContent=txt; } };
+    set('temp-'+key,'—'); set('windline-'+key,''); set('desc-'+key,'Not Available'); set('hilo-'+key,''); set('hilo2-'+key,'');
+    ['wind-','sun-'].forEach(function(p){ var e=document.getElementById(p+key); if(e){ e.textContent='Not Available'; e.classList.add('weather-value-na'); } });
+    var st=document.getElementById('strip-'+key); if(st) st.innerHTML='';
+    var tb=document.getElementById('tbl-'+key); if(tb) tb.innerHTML='<tr><td colspan="6" class="wx-na">Forecast not available right now.</td></tr>';
+  }
   async function loadLiveWeather(){
-    const items = document.querySelectorAll('.weather-acc-item[data-lat][data-lon]');
-    for(const item of items){
-      const key = item.getAttribute('data-key');
-      const lat = item.getAttribute('data-lat');
-      const lon = item.getAttribute('data-lon');
-      if(!key || !lat || !lon) continue;
-
-      const windEl = document.getElementById('wind-' + key);
-      const sunEl = document.getElementById('sun-' + key);
-      if(!windEl && !sunEl) continue;
-
-      function markUnavailable(el){
-        if(!el) return;
-        el.textContent = 'Not Available';
-        el.classList.add('weather-value-na');
-      }
-
+    var items=document.querySelectorAll('.weather-acc-item[data-lat][data-lon]');
+    for(var n=0;n<items.length;n++){
+      var item=items[n], key=item.getAttribute('data-key'), lat=item.getAttribute('data-lat'), lon=item.getAttribute('data-lon');
+      if(!key||!lat||!lon) continue;
       try{
-        const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat +
-          '&longitude=' + lon +
-          '&current=wind_speed_10m&daily=sunrise,sunset' +
-          '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto';
-        const res = await fetch(url);
-        if(!res.ok){
-          markUnavailable(windEl);
-          markUnavailable(sunEl);
-          continue;
-        }
-        const data = await res.json();
-
-        if(windEl){
-          if(data.current && typeof data.current.wind_speed_10m === 'number'){
-            windEl.textContent = 'Wind ' + Math.round(data.current.wind_speed_10m) + ' mph';
-            windEl.classList.remove('weather-value-na');
-          } else {
-            markUnavailable(windEl);
-          }
-        }
-        if(sunEl){
-          let sunrise = null, sunset = null;
-          if(data.daily && data.daily.sunrise && data.daily.sunrise[0] && data.daily.sunset && data.daily.sunset[0]){
-            sunrise = formatSunTime(data.daily.sunrise[0]);
-            sunset = formatSunTime(data.daily.sunset[0]);
-          }
-          if(sunrise && sunset){
-            sunEl.textContent = sunrise + ' – ' + sunset;
-            sunEl.classList.remove('weather-value-na');
-          } else {
-            markUnavailable(sunEl);
-          }
-        }
-      }catch(err){
-        markUnavailable(windEl);
-        markUnavailable(sunEl);
-      }
+        var url='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+
+          '&current=temperature_2m,weather_code,wind_speed_10m'+
+          '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset'+
+          '&forecast_days=8&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto';
+        var res=await fetch(url);
+        if(!res.ok){ wxFail(key); continue; }
+        var d=await res.json();
+        if(!d.current||!d.daily||!d.daily.time){ wxFail(key); continue; }
+        var info=wxInfo(d.current.weather_code);
+        var ic=document.getElementById('icon-'+key); if(ic) ic.innerHTML=WX_ICONS[info[1]]||WX_ICONS.cloud;
+        document.getElementById('temp-'+key).textContent=wxRound(d.current.temperature_2m);
+        document.getElementById('desc-'+key).textContent=info[0];
+        var hl='H '+wxRound(d.daily.temperature_2m_max[0])+'  L '+wxRound(d.daily.temperature_2m_min[0]);
+        document.getElementById('hilo-'+key).textContent=hl;
+        var h2=document.getElementById('hilo2-'+key); if(h2) h2.textContent='Today '+hl;
+        var wl=document.getElementById('windline-'+key); if(wl) wl.textContent=(typeof d.current.wind_speed_10m==='number')?'Wind '+Math.round(d.current.wind_speed_10m)+' mph':'';
+        var w=document.getElementById('wind-'+key);
+        if(w){ if(typeof d.current.wind_speed_10m==='number'){ w.textContent='Wind '+Math.round(d.current.wind_speed_10m)+' mph'; w.classList.remove('weather-value-na'); } else { w.textContent='Not Available'; w.classList.add('weather-value-na'); } }
+        var su=document.getElementById('sun-'+key);
+        if(su){ if(d.daily.sunrise&&d.daily.sunrise[0]&&d.daily.sunset&&d.daily.sunset[0]){ su.textContent=formatSunTime(d.daily.sunrise[0])+' – '+formatSunTime(d.daily.sunset[0]); su.classList.remove('weather-value-na'); } else { su.textContent='Not Available'; su.classList.add('weather-value-na'); } }
+        var strip='', rows='';
+        d.daily.time.forEach(function(t,i){
+          var pp=d.daily.precipitation_probability_max[i], pps=(typeof pp==='number')?Math.round(pp)+'%':'—';
+          var sky=wxInfo(d.daily.weather_code[i])[0];
+          if(i>=1&&i<=5) strip+='<span class="wx-day"><b>'+wxDay(t,i)+'</b><span class="hi">'+wxRound(d.daily.temperature_2m_max[i])+'</span> <span class="lo">'+wxRound(d.daily.temperature_2m_min[i])+'</span><span class="pp">'+pps+' rain</span></span>';
+          rows+='<tr><td>'+wxDay(t,i)+'</td><td>'+wxDate(t)+'</td><td>'+sky+'</td><td class="num">'+wxRound(d.daily.temperature_2m_max[i])+'</td><td class="num">'+wxRound(d.daily.temperature_2m_min[i])+'</td><td class="num">'+pps+'</td></tr>';
+        });
+        document.getElementById('strip-'+key).innerHTML=strip;
+        document.getElementById('tbl-'+key).innerHTML=rows;
+      }catch(err){ wxFail(key); }
     }
   }
 
-  loadLiveWeather();
+  loadLiveWeather(); setInterval(loadLiveWeather,900000);
 
   // Moon phase — calculated locally, no API needed
   function updateMoonPhase(){
